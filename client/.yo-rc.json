@@ -1,0 +1,9 @@
+{
+  "generator-react-webpack": {
+    "appName": "hirundo",
+    "style": "scss",
+    "cssmodules": true,
+    "postcss": false,
+    "generatedWithVersion": 4
+  }
+}
