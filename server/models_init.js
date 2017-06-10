@@ -13,9 +13,11 @@ DS.registerAdapter('firebase', adapter, { default: true });
 
 const registerPost = require('./models/post');
 const registerUser = require('./models/user');
+const registerLike = require('./models/like');
 
 module.exports = (app) => {
 	app.locals.DS = DS;
 	app.locals.Post = registerPost(DS);
     app.locals.User = registerUser(DS);
+    app.locals.Like = registerLike(DS);
 };
