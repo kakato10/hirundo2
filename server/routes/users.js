@@ -2,15 +2,15 @@
 
 const express = require('express');
 const router = express.Router();
-const attachBasicListeners = require('./basicEndpoint');
+const attachBasicListeners = require('./basicListeners');
 
-const CLREndpoint = '/api/posts';
+const CLREndpoint = '/api/users';
 const ILREndpoint = `${CLREndpoint}/:id`;
 
 attachBasicListeners(router, {
     CLREndpoint,
     ILREndpoint,
-    resourceName: 'Post'
+    resourceName: 'User'
 });
 
 module.exports = router;
