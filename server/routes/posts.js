@@ -39,7 +39,7 @@ router.get(ILRPostEndpoint, (req, res) => {
 });
 
 router.put(ILRPostEndpoint, (req, res) => {
-	if (!req.body || !req.body.post) { 
+	if (!req.body || !req.body.post) {
 		return res.status(400).send('No Post data provided!');
 	}
 
