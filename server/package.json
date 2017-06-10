@@ -1,0 +1,26 @@
+{
+  "name": "hirundo2",
+  "version": "2.0.0",
+  "description": "A basic reactive social app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kakato10/hirundo2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "firebase": "2.4.2",
+    "js-data": "^2.10.0",
+    "js-data-firebase": "^2.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/kakato10/hirundo2/issues"
+  },
+  "homepage": "https://github.com/kakato10/hirundo2#readme"
+}
