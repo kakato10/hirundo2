@@ -24,7 +24,9 @@ passport.deserializeUser(function(id, done) {
 router.post(endpoint,
     passport.authenticate('local'),
     (req, res) => {
-        res.send(_.omit(req.user, ['password']));
+        res.send({
+            user: _.omit(req.user, ['password'])
+        });
     });
 
 module.exports = router;

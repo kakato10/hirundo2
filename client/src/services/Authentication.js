@@ -1,14 +1,13 @@
-export default class Authentication {
-  static login(username, password) {
-    return new Promise((resolve, reject) => {
-      if (username === password) {
-        resolve({
-          id: 1,
-          username
-        });
-      } else {
-        reject('Username and password does not match');
-      }
-    });
+import Connection from './Connection.js';
+
+class AuthService {
+  login(username, password) {
+    const path = '/auth/login';
+    return Connection.send(path, {username, password}, 'POST')
+      .then(data => {
+        return data.user;
+      });
   }
 }
+
+export default new AuthService();

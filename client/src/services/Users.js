@@ -1,6 +1,6 @@
 import Connection from './Connection.js';
 
-const API_PATH = 'users';
+const API_PATH = '/users';
 
 class RiderCardsApi {
   createUser(userData) {

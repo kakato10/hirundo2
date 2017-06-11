@@ -7,12 +7,7 @@ export function login(username, password, nextPath) {
 
   return dispatch => {
     return Auth.login(username, password)
-      .then(currentUser => {
-        user = currentUser;
-
-        return currentUser;
-      })
-      .then(() => {
+      .then((user) => {
         dispatch({
           type: ACTIONS.AUTH_COMPLETED,
             payload: {
@@ -42,9 +37,7 @@ export function login(username, password, nextPath) {
 export function register(userData) {
   return dispatch => {
     return UsersAPI.createUser(userData)
-      .then((stuff) => {
-        console.log(stuff);
-
+      .then(() => {
         dispatch({
           type: ACTIONS.REGISTER_USER,
           payload: {},

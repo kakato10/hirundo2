@@ -3,6 +3,8 @@ const LocalStrategy = require('passport-local');
 module.exports = new LocalStrategy({
         passReqToCallback: true,
     }, (req, username, password, done) => {
+        console.log(username, password);
+
         //TODO: Implement better error handling on auth
         req.app.locals.User.findAll({
             username
