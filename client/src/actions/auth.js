@@ -1,5 +1,6 @@
 import Auth from '../services/Authentication'
 import ACTIONS from './action_types';
+import UsersAPI from '../services/Users';
 
 export function login(username, password, nextPath) {
   let user;
@@ -36,4 +37,25 @@ export function login(username, password, nextPath) {
         });
       });
   };
+}
+
+export function register(userData) {
+  return dispatch => {
+    return UsersAPI.createUser(userData)
+      .then((stuff) => {
+        console.log(stuff);
+
+        dispatch({
+          type: ACTIONS.REGISTER_USER,
+          payload: {},
+          meta: {
+            transition: () => {
+              return {
+                pathname: `/login`
+              };
+            }
+          }
+        })
+      })
+  }
 }

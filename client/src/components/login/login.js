@@ -1,13 +1,11 @@
 import {connect} from 'react-redux';
 import {login} from '../../actions/auth';
-import LabeledInput from '../labeled_input/labeled_input';
 import React from 'react';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+
 
 class Login extends React.Component {
-  // static propTypes = {
-  //   onLogin: React.PropTypes.func.isRequired
-  // };
-
   constructor(props) {
     super(props);
     this.username = null;
@@ -20,28 +18,29 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className='login'>
-        <LabeledInput
-          type='text'
-          className='username-input'
-          onChange={(username) => {
+      <div className="login">
+        <TextField
+          hintText="Enter your username"
+          floatingLabelText="Username"
+          type="text"
+          onChange={(e, username) => {
             this.username = username;
           }}
-          label='Username'
         />
-        <LabeledInput
-          type='password'
-          className='password-input'
-          onChange={(password) => {
+        <TextField
+          hintText="Enter your password"
+          floatingLabelText="Password"
+          type="password"
+          onChange={(e, password) => {
             this.password = password;
           }}
-          label='Password'
         />
-        <button onClick={() => {
-          this.onLoginClicked();
-        }}>
-          Login
-        </button>
+        <FlatButton
+          label="Login"
+          primary={true}
+          onTouchTap={() => {
+            this.onLoginClicked();
+          }}/>
       </div>
     );
   }

@@ -67,6 +67,7 @@
     "node-sass": "^3.7.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "cross-env": "^3.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
@@ -81,6 +82,7 @@
     "redux": "^3.6.0",
     "redux-history-transitions": "^2.2.0",
     "redux-thunk": "^2.2.0",
+    "superagent": "^3.5.2",
     "webpack": "^2.1.0-beta.6"
   }
 }
