@@ -1,19 +1,20 @@
-import { createStore } from 'redux';
-import reducers from '../reducers';
+import { createStore, createStore as reduxCreateStore,
+  applyMiddleware, compose } from 'redux';
+import reducer from '../reducers';
+import thunk from 'redux-thunk';
+import handleTransitions from 'redux-history-transitions';
 
-function reduxStore(initialState) {
-  const store = createStore(reducers, initialState,
-    window.devToolsExtension && window.devToolsExtension());
+const MIDDLEWARE = [thunk];
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      // We need to require for hot reloading to work properly.
-      const nextReducer = require('../reducers');  // eslint-disable-line global-require
+function reduxStore(history) {
+  const transitionEnhancer = handleTransitions(history);
+  let enhancer = transitionEnhancer;
 
-      store.replaceReducer(nextReducer);
-    });
+  if (global.devToolsExtension) {
+    enhancer = compose(transitionEnhancer, global.devToolsExtension());
   }
+
+  const store = applyMiddleware(...MIDDLEWARE)(reduxCreateStore)(reducer, enhancer);
 
   return store;
 }
