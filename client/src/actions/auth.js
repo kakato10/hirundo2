@@ -1,6 +1,6 @@
 import Auth from '../services/Authentication'
 import ACTIONS from './action_types';
-import UsersAPI from '../services/Users';
+import UsersAPI from '../services/users';
 
 export function login(username, password, nextPath) {
   let user;
