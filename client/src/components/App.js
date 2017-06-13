@@ -1,22 +1,34 @@
 import React from 'react';
-import YeomanImage from './yeoman_image/yeoman_image';
 import './app.css';
+import Login from './login/login';
+import {Router, Route, browserHistory} from 'react-router';
+import YeomanImage from './yeoman_image/yeoman_image';
+import RegistrationForm from '../components/registration_form/registration_form';
 
-class AppComponent extends React.Component {
+function requiresAuth(store, nextState, replace) {
+  const currentUser = store.getState().auth.user;
 
-  render() {
-    return (
-      <div className="index">
-        <YeomanImage />
-        <div className="notice">
-          Please edit <code>src/components/App.js</code> to get started!
-        </div>
-      </div>
-    );
+  if (!currentUser) {
+    replace({
+      pathname: '/login',
+      state: {nextPathname: nextState.location.pathname}
+    });
   }
 }
 
-AppComponent.defaultProps = {
-};
+export default function App({store}) {
+  const requireUser = requiresAuth.bind(this, store);
 
-export default AppComponent;
+  return (
+    <Router history={browserHistory}>
+      <Route path='/'
+             onEnter={requireUser}
+             component={YeomanImage}>
+      </Route>
+      <Route
+        path="/register"
+        component={RegistrationForm}/>
+      <Route path='/login' component={Login} />
+    </Router>
+  );
+}

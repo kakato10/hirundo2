@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const attachBasicListeners = require('./basicEndpoint');
+const attachBasicListeners = require('./basicListeners');
 
 const CLREndpoint = '/api/posts';
 const ILREndpoint = `${CLREndpoint}/:id`;

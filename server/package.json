@@ -17,7 +17,10 @@
     "express": "^4.15.3",
     "firebase": "2.4.2",
     "js-data": "^2.10.0",
-    "js-data-firebase": "^2.1.1"
+    "js-data-firebase": "^2.1.1",
+    "lodash": "^4.17.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "bugs": {
     "url": "https://github.com/kakato10/hirundo2/issues"

@@ -9,7 +9,11 @@
  */
 /* Populated by react-webpack-redux:reducer */
 import { combineReducers } from 'redux';
+import authReducer from './auth';
 
-const reducers = {};
+const reducers = {
+  auth: authReducer
+};
+
 const combined = combineReducers(reducers);
 module.exports = combined;
