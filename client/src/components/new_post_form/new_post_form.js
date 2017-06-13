@@ -1,6 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 
 export default class NewPostForm extends React.Component {
   constructor(props) {
@@ -22,24 +24,32 @@ export default class NewPostForm extends React.Component {
   render() {
     return (
       <div className="new-post-form">
-        <h2>New post</h2>
+        <Paper zDepth={2}>
+        <h2>What's on your mind?</h2>
+        <Divider/>
         <TextField
           hintText="What's on your mind?"
           multiLine={true}
-          rows={2}
+          rows={1}
           rowsMax={4}
           onChange={(e, postText) => {
             this.postText = postText;
           }}
+          underlineShow={false}
+          style={{
+            marginLeft: 20,
+            marginRight: 20
+          }}
+          fullWidth
         />
-        <div>
-          <FlatButton
-            label="Post"
-            primary={true}
-            onTouchTap={() => {
-              this.onPostClicked();
-            }}/>
-        </div>
+        <Divider/>
+        <FlatButton
+          label="Post"
+          primary={true}
+          onTouchTap={() => {
+            this.onPostClicked();
+          }}/>
+        </Paper>
       </div>
     );
   }
