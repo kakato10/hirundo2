@@ -5,6 +5,7 @@ export function createPost(postData) {
   return dispatch => {
     PostsApi.createPost(postData)
       .then((data) => {
+        //TODO: WTF have I written?
         return PostsApi.getPostByLocation(data.location);
       })
       .then((post) => {
@@ -15,5 +16,19 @@ export function createPost(postData) {
           }
         });
       });
+  }
+}
+
+export function loadPosts() {
+  return dispatch => {
+    PostsApi.loadPosts()
+      .then(posts => {
+        dispatch({
+          type: ACTIONS.POSTS_LOADED,
+          payload: {
+            posts
+          }
+        })
+      })
   }
 }

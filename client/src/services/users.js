@@ -10,6 +10,14 @@ class UsersApi {
   loadUsers() {
     return Connection.send(API_PATH);
   }
+
+  followUser(userId) {
+    return Connection.send(`${API_PATH}/follow`, {userId}, 'POST');
+  }
+
+  unfollowUser(userId) {
+    return Connection.send(`${API_PATH}/unfollow`, {userId}, 'POST');
+  }
 }
 
 export default new UsersApi();

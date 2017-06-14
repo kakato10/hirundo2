@@ -3,7 +3,16 @@ module.exports = {
         basic: {
             id: true,
             username: true,
-            email: true
+            email: true,
+            followedUsers: true
+        }
+    },
+    post: {
+        basic: {
+            id: true,
+            authorUsername: true,
+            authorId: true,
+            content: true
         }
     }
 };

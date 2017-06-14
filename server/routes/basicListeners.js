@@ -6,7 +6,7 @@ module.exports = (router, {
             put: true,
             post: true,
             delete: true
-        }}, projection) => {
+        }}, projection, filters) => {
 
     function sendEntity(res, entity) {
         if (projection) {
@@ -17,7 +17,13 @@ module.exports = (router, {
     }
 
     router.get(CLREndpoint, (req, res) => {
-        req.app.locals[resourceName].findAll().then((entities) => {
+        let query;
+
+        if (filters && filters.getCLR) {
+            query = filters.getCLR(req)
+        }
+
+        req.app.locals[resourceName].findAll(query).then((entities) => {
             if (projection) {
                 entities = Helpers.applyProjectionOnCollection(entities, projection);
             }

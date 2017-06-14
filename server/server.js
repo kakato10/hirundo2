@@ -6,6 +6,7 @@ const port = 3000;
 const passport = require('passport');
 // body-parser registration
 const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 
 app.use(bodyParser.json({ type: 'application/json' }));
 
@@ -18,6 +19,11 @@ const postsRoutes = require('./routes/posts.js');
 const usersRoutes = require('./routes/users.js');
 const commentsRoutes = require('./routes/comments.js');
 const authRoutes = require('./routes/authentication');
+
+app.use(cookieSession({
+    keys: ['secret1', 'secret2'],
+    maxAge: 24 * 60 * 60 * 1000
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

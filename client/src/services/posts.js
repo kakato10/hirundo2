@@ -8,6 +8,10 @@ class PostsApi {
     return Connection.send(API_PATH, postData, 'POST');
   }
 
+  loadPosts() {
+    return Connection.send(API_PATH);
+  }
+
   getPostByLocation(location) {
     const id = _.last(location.split('/'));
 

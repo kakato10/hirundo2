@@ -11,11 +11,14 @@
 import { combineReducers } from 'redux';
 import authReducer from './auth';
 import usersReducer from './users';
+import postsReducer from './posts';
 
 const reducers = {
   auth: authReducer,
-  users: usersReducer
+  users: usersReducer,
+  posts: postsReducer,
 };
 
 const combined = combineReducers(reducers);
+
 module.exports = combined;

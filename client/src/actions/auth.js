@@ -39,7 +39,7 @@ export function register(userData) {
     return UsersAPI.createUser(userData)
       .then(() => {
         dispatch({
-          type: ACTIONS.USER_REGISTERED,
+          type: ACTIONS.REGISTER_USER,
           payload: {},
           meta: {
             transition: () => {

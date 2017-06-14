@@ -18,9 +18,10 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(req, id, done) {
-    req.locals.User.find(id, function(err, user) {
-        done(err, user);
-    });
+    req.app.locals.User.find(id)
+        .then((user) => {
+            done(null, user);
+        });
 });
 
 router.post(endpoint,
