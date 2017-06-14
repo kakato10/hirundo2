@@ -10,9 +10,11 @@
 /* Populated by react-webpack-redux:reducer */
 import { combineReducers } from 'redux';
 import authReducer from './auth';
+import usersReducer from './users';
 
 const reducers = {
-  auth: authReducer
+  auth: authReducer,
+  users: usersReducer
 };
 
 const combined = combineReducers(reducers);

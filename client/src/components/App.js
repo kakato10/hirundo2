@@ -3,7 +3,7 @@ import './app.css';
 import Login from './login/login';
 import {Router, Route, browserHistory} from 'react-router';
 import RegistrationForm from '../components/registration_form/registration_form';
-import Feed from '../components/feed/feed';
+import Feed from '../containers/feed/feed';
 
 function requiresAuth(store, nextState, replace) {
   const currentUser = store.getState().auth.user;
