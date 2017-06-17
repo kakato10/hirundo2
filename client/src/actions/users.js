@@ -53,7 +53,7 @@ export function likePost(postId) {
     UsersAPI.likePost(postId)
       .then(post => { // updated post
         return dispatch({
-          type: ACTIONS.POST_LIKED,
+          type: ACTIONS.POST_UPDATED,
           payload: {
             post
           }
@@ -62,3 +62,16 @@ export function likePost(postId) {
   };
 }
 
+export function dislikePost(postId) {
+  return dispatch => {
+    UsersAPI.dislikePost(postId)
+      .then(post => { // updated post
+        return dispatch({
+          type: ACTIONS.POST_UPDATED,
+          payload: {
+            post
+          }
+        });
+      });
+  };
+}

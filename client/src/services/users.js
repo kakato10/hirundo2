@@ -22,6 +22,10 @@ class UsersApi {
   likePost(postId) {
     return Connection.send(`${API_PATH}/like`, {postId}, 'POST');
   }
+
+  dislikePost(postId) {
+    return Connection.send(`${API_PATH}/dislike`, {postId}, 'POST');
+  }
 }
 
 export default new UsersApi();

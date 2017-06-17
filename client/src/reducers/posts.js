@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
       break;
     }
 
-    case ACTION_TYPES.POST_LIKED: {
+    case ACTION_TYPES.POST_UPDATED: {
       // updated post
       const {post} = action.payload;
 

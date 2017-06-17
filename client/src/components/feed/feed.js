@@ -38,12 +38,19 @@ export default class Feed extends React.Component {
             <div key={index}>
               <p>{post.content}</p>
               <span>{likesNumber} likes</span>
-              { !liked &&
-                <FlatButton
+              { liked
+                ? <FlatButton
+                  label="Dislike"
+                  onTouchTap={() => {
+                    this.props.dislikePost(post.id);
+                  }}
+                  secondary={true}/>
+                : <FlatButton
                   label="Like"
                   onTouchTap={() => {
                     this.props.likePost(post.id);
-                  }}/>
+                  }}
+                  primary={true}/>
               }
             </div>
           );
