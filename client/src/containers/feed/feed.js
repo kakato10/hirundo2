@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
-import {loadUsers, followUser, unfollowUser} from '../../actions/users';
+import {loadUsers, followUser, unfollowUser,
+        likePost, dislikePost} from '../../actions/users';
 import {loadPosts} from '../../actions/posts';
 import Feed from '../../components/feed/feed';
 
@@ -27,7 +28,15 @@ function mapDispatchToProps(dispatch) {
 
     loadPosts: () => {
       return dispatch(loadPosts());
-    }
+    },
+
+    likePost: (postId) => {
+      return dispatch(likePost(postId));
+    },
+
+    dislikePost: (postId) => {
+      return dispatch(dislikePost(postId));
+    },
   }
 }
 

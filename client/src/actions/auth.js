@@ -7,10 +7,10 @@ export function login(username, password, nextPath) {
 
   return dispatch => {
     return Auth.login(username, password)
-      .then((user) => {
+      .then(user => {
         dispatch({
           type: ACTIONS.AUTH_COMPLETED,
-            payload: {
+          payload: {
             user,
             error: null
           },

@@ -22,7 +22,7 @@ const authRoutes = require('./routes/authentication');
 
 app.use(cookieSession({
     keys: ['secret1', 'secret2'],
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
 }));
 app.use(passport.initialize());
 app.use(passport.session());

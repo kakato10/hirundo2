@@ -18,6 +18,14 @@ class UsersApi {
   unfollowUser(userId) {
     return Connection.send(`${API_PATH}/unfollow`, {userId}, 'POST');
   }
+
+  likePost(postId) {
+    return Connection.send(`${API_PATH}/like`, {postId}, 'POST');
+  }
+
+  dislikePost(postId) {
+    return Connection.send(`${API_PATH}/dislike`, {postId}, 'POST');
+  }
 }
 
 export default new UsersApi();

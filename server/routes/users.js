@@ -2,9 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash');
 
 const attachBasicListeners = require('./basicListeners');
-const userProjections = require('../services/projections').user;
+const projections = require('../services/projections');
 const Helpers = require('../services/helpers');
 
 const CLREndpoint = '/api/users';
@@ -14,7 +15,15 @@ attachBasicListeners(router, {
     CLREndpoint,
     ILREndpoint,
     resourceName: 'User'
-}, userProjections.basic);
+}, projections.user.basic);
+
+function updatePost(req, res, post) {
+    return req.app.locals.Post.update(post.id, post)
+        .then(post => {
+            res.send(Helpers.applyProjectionOnEntity(post,
+                projections.post.basic));
+        });
+}
 
 router.post(`${CLREndpoint}/follow`, (req, res) => {
     if (!req.body || !req.body.userId) {
@@ -32,7 +41,7 @@ router.post(`${CLREndpoint}/follow`, (req, res) => {
             req.app.locals.User.update(user.id, user)
                 .then(user => {
                     res.send(Helpers.applyProjectionOnEntity(user,
-                        userProjections.basic));
+                        projections.user.basic));
                 });
         });
 });
@@ -52,10 +61,45 @@ router.post(`${CLREndpoint}/unfollow`, (req, res) => {
                 req.app.locals.User.update(user.id, user)
                     .then(user => {
                         res.send(Helpers.applyProjectionOnEntity(user,
-                            userProjections.basic));
+                            projections.user.basic));
                     });
-            }
+            } // TODO - error handler
         });
+});
+
+router.post(`${CLREndpoint}/like`, (req, res) => {
+    if (!req.body || !req.body.postId) {
+        return res.status(400).send('No data provided!');
+    }
+
+    req.app.locals.Post.find(req.body.postId)
+        .then(post => {
+            if (post.likes) {
+                post.likes.push(req.user.id);
+            } else {
+                post.likes = [req.user.id];
+            }
+
+            updatePost(req, res, post);
+        });
+
+});
+
+router.post(`${CLREndpoint}/dislike`, (req, res) => {
+    if (!req.body || !req.body.postId) {
+        return res.status(400).send('No data provided!');
+    }
+
+    req.app.locals.Post.find(req.body.postId)
+        .then(post => {
+            if (post.likes) {
+                post.likes = _.filter(post.likes,
+                    uid => uid !== req.user.id);
+
+                updatePost(req, res, post);
+            } // TODO - error handler
+        });
+
 });
 
 module.exports = router;
