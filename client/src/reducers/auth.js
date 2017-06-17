@@ -17,6 +17,20 @@ export default function reducer(state = initialState, action) {
       break;
     }
 
+    case ACTION_TYPES.USER_FOLLOWED: {
+      const {user} = action.payload;
+
+      result = _.assign({}, {user});
+      break;
+    }
+
+    case ACTION_TYPES.USER_UNFOLLOWED: {
+      const {user} = action.payload;
+
+      result = _.assign({}, {user});
+      break;
+    }
+
     default: {
       result = _.assign({}, state);
     }

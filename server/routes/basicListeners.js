@@ -1,13 +1,33 @@
+const Helpers = require('../services/helpers');
+
 module.exports = (router, {
         CLREndpoint, ILREndpoint, resourceName,
         permissions = {
             put: true,
             post: true,
             delete: true
-        }}) => {
+        }}, projection, filters) => {
+
+    function sendEntity(res, entity) {
+        if (projection) {
+            entity = Helpers.applyProjectionOnEntity(entity, projection);
+        }
+
+        res.send(entity);
+    }
 
     router.get(CLREndpoint, (req, res) => {
-        req.app.locals[resourceName].findAll().then((entities) => {
+        let query;
+
+        if (filters && filters.getCLR) {
+            query = filters.getCLR(req)
+        }
+
+        req.app.locals[resourceName].findAll(query).then((entities) => {
+            if (projection) {
+                entities = Helpers.applyProjectionOnCollection(entities, projection);
+            }
+
             res.send(entities);
         });
     });
@@ -16,7 +36,7 @@ module.exports = (router, {
         const entityId = req.params.id;
 
         req.app.locals[resourceName].find(entityId).then((entity) => {
-            res.send(entity);
+            sendEntity(res, entity);
         }, (e) => {
             res.status(500).send(e);
         });
@@ -50,7 +70,7 @@ module.exports = (router, {
             const updateDate = req.body;
 
             req.app.locals[Resource].update(entityId, updateDate).then((entity) => {
-                res.send(entity);
+                sendEntity(res, entity);
             }, (e) => {
                 res.status(500).send(e);
             });
