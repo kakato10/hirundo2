@@ -1,5 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 
 import NewPostForm from '../../containers/new_post_form/new_post_form';
@@ -25,11 +26,27 @@ export default class Feed extends React.Component {
 
   renderPosts() {
     const {posts} = this.props;
+    const loggedUserId = this.props.loggedUser.id;
 
     return (
       <div className="posts-list">
         {posts.map((post, index) => {
-          return <p key={index}>{post.content}</p>;
+          const likesNumber = post.likes ? post.likes.length : 0;
+          const liked = post.likes && post.likes.includes(loggedUserId);
+
+          return (
+            <div key={index}>
+              <p>{post.content}</p>
+              <span>{likesNumber} likes</span>
+              { !liked &&
+                <FlatButton
+                  label="Like"
+                  onTouchTap={() => {
+                    this.props.likePost(post.id);
+                  }}/>
+              }
+            </div>
+          );
         })}
       </div>
     )

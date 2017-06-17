@@ -12,7 +12,8 @@ module.exports = {
             id: true,
             authorUsername: true,
             authorId: true,
-            content: true
+            content: true,
+            likes: true
         }
     }
 };

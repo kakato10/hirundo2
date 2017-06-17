@@ -14,6 +14,20 @@ export default function reducer(state = initialState, action) {
       break;
     }
 
+    case ACTION_TYPES.POST_LIKED: {
+      // updated post
+      const {post} = action.payload;
+
+      let modifiesPosts = _.clone(state);
+
+      modifiesPosts = _.map(modifiesPosts, p => {
+        return p.id === post.id ? post : p;
+      });
+
+      result = modifiesPosts;
+      break;
+    }
+
     default: {
       result = _.clone(state);
     }
