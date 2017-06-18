@@ -2,6 +2,8 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
 
 import NewPostForm from '../../containers/new_post_form/new_post_form';
 import UsersList from '../users_list/users_list';
@@ -35,24 +37,57 @@ export default class Feed extends React.Component {
           const liked = post.likes && post.likes.includes(loggedUserId);
 
           return (
-            <div key={index}>
-              <p>{post.content}</p>
-              <span>{likesNumber} likes</span>
-              { liked
-                ? <FlatButton
-                  label="Dislike"
-                  onTouchTap={() => {
-                    this.props.dislikePost(post.id);
-                  }}
-                  secondary={true}/>
-                : <FlatButton
-                  label="Like"
-                  onTouchTap={() => {
-                    this.props.likePost(post.id);
-                  }}
-                  primary={true}/>
-              }
-            </div>
+            <Card
+              key={index}
+              style={{
+                marginBottom: 20,
+                borderBottomRightRadius: 10,
+                borderBottomLeftRadius: 10,
+                marginTop: 20
+              }}
+              zDepth={3}>
+              <CardHeader
+                title={post.authorUsername}
+                style={{
+                  borderTopRightRadius: 10,
+                  borderTopLeftRadius: 10,
+                  backgroundColor: '#00bcd4',
+                }}
+                titleColor="white"
+                subtitleColor="white"
+                titleStyle={{
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                  color: 'white'
+                }}
+                subtitle={`${likesNumber} likes`}
+              />
+              <CardText
+                expandable={false}
+                style={{
+                  wordWrap: 'break-word',
+                  fontSize: 18
+                }}>
+                {post.content}
+              </CardText>
+              <Divider/>
+              <CardActions>
+                { liked
+                  ? <FlatButton
+                    label="Dislike"
+                    onTouchTap={() => {
+                      this.props.dislikePost(post.id);
+                    }}
+                    secondary={true}/>
+                  : <FlatButton
+                    label="Like"
+                    onTouchTap={() => {
+                      this.props.likePost(post.id);
+                    }}
+                    primary={true}/>
+                }
+              </CardActions>
+            </Card>
           );
         })}
       </div>
@@ -66,15 +101,14 @@ export default class Feed extends React.Component {
     return (
       <div className="feed">
         <NewPostForm/>
-        <div>
-          {this.renderPosts()}
-        </div>
         <RaisedButton
-          label="Users list"
-          primary={true}
+          label="Show Users list"
+          secondary={true}
+          fullWidth
           onTouchTap={() => {
             this.loadUsers();
           }}/>
+        {this.renderPosts()}
         <Dialog
           title="Users list"
           open={showUsersList}

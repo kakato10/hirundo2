@@ -53,6 +53,7 @@ class RegistrationForm extends React.Component {
           hintText="Enter your email"
           floatingLabelText="Email"
           type="text"
+          fullWidth
           onChange={(e, email) => {
             this.email = email;
           }}
@@ -61,6 +62,7 @@ class RegistrationForm extends React.Component {
           hintText="Enter your username"
           floatingLabelText="Username"
           type="text"
+          fullWidth
           onChange={(e, username) => {
             this.username = username;
           }}
@@ -69,6 +71,7 @@ class RegistrationForm extends React.Component {
           hintText="Enter your password"
           floatingLabelText="Password"
           type="password"
+          fullWidth
           errorText={errors.password ? "Passwords do not match!" : ''}
           onChange={(e, password) => {
             this.password = password;
@@ -78,6 +81,7 @@ class RegistrationForm extends React.Component {
           hintText="Enter your password again"
           floatingLabelText="Password repeat"
           type="password"
+          fullWidth
           onChange={(e, password) => {
             this.passwordRepeat = password;
           }}
@@ -85,6 +89,7 @@ class RegistrationForm extends React.Component {
         <FlatButton
           label="Register"
           primary={true}
+          fullWidth
           onTouchTap={() => {
             this.onRegisterClicked();
           }}/>

@@ -23,6 +23,7 @@ class Login extends React.Component {
           hintText="Enter your username"
           floatingLabelText="Username"
           type="text"
+          fullWidth
           onChange={(e, username) => {
             this.username = username;
           }}
@@ -31,6 +32,7 @@ class Login extends React.Component {
           hintText="Enter your password"
           floatingLabelText="Password"
           type="password"
+          fullWidth
           onChange={(e, password) => {
             this.password = password;
           }}
@@ -38,6 +40,7 @@ class Login extends React.Component {
         <FlatButton
           label="Login"
           primary={true}
+          fullWidth
           onTouchTap={() => {
             this.onLoginClicked();
           }}/>
