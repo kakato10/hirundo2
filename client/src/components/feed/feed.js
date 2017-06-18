@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 
 import NewPostForm from '../../containers/new_post_form/new_post_form';
+import CommentsForm from '../../containers/comments_form/comments_form';
 import UsersList from '../users_list/users_list';
 
 export default class Feed extends React.Component {
@@ -11,7 +12,11 @@ export default class Feed extends React.Component {
     super(props);
 
     this.state = {
-      showUsersList: false
+      showUsersList: false,
+      postDetails: {
+        showComments: false,
+        postId: null,
+      }
     };
 
     this.props.loadPosts();
@@ -19,13 +24,22 @@ export default class Feed extends React.Component {
 
   loadUsers() {
     this.props.loadUsers();
-      this.setState({
-        showUsersList: true
-      });
+    this.setState({
+      showUsersList: true
+    });
+  }
+
+  displayComments(postId) {
+    this.setState({
+      postDetails: {
+        showComments: true,
+        postId: postId,
+      }
+    });
   }
 
   renderPosts() {
-    const {posts} = this.props;
+    const {posts, comments} = this.props;
     const loggedUserId = this.props.loggedUser.id;
 
     return (
@@ -52,6 +66,12 @@ export default class Feed extends React.Component {
                   }}
                   primary={true}/>
               }
+              <FlatButton
+                label="Comments"
+                onTouchTap={() => {
+                  this.displayComments(post.id);
+                }}
+                primary={true}/>
             </div>
           );
         })}
@@ -61,6 +81,7 @@ export default class Feed extends React.Component {
 
   render() {
     const {showUsersList} = this.state;
+    const {postDetails} = this.state;
     const {users, loggedUser, followUser, unfollowUser} = this.props;
 
     return (
@@ -89,6 +110,21 @@ export default class Feed extends React.Component {
             loggedUser={loggedUser}
             followUser={followUser}
             unfollowUser={unfollowUser}/>
+        </Dialog>
+        <Dialog
+          title="Comments"
+          open={postDetails.showComments}
+          onRequestClose={() => {
+            this.setState({
+              postDetails: {
+                showComments: false,
+                postId: null,
+              }
+            });
+          }}
+          autoScrollBodyContent={true}>
+          <CommentsForm
+            postId={postDetails.postId}/>
         </Dialog>
       </div>
     );

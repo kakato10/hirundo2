@@ -1,4 +1,5 @@
 const Helpers = require('../services/helpers');
+const _ = require('lodash');
 
 module.exports = (router, {
         CLREndpoint, ILREndpoint, resourceName,
@@ -19,7 +20,9 @@ module.exports = (router, {
     router.get(CLREndpoint, (req, res) => {
         let query;
 
-        if (filters && filters.getCLR) {
+        if (_.keys(req.query).length && filters && filters.getCLRWithQuery) {
+            query = filters.getCLRWithQuery(req);
+        } else if (filters && filters.getCLR) {
             query = filters.getCLR(req)
         }
 
@@ -48,7 +51,11 @@ module.exports = (router, {
                 return res.status(400).send('No data provided!');
             }
 
-            const data = req.body;
+            let data = req.body;
+
+            if (filters && filters.postCLR) {
+                data = filters.postCLR(data, req);
+            }
 
             req.app.locals[resourceName].create(data).then((entity) => {
                 res.status(201).send({

@@ -15,5 +15,13 @@ module.exports = {
             content: true,
             likes: true
         }
+    },
+    comment: {
+        basic: {
+            id: true,
+            authorId: true,
+            authorUsername: true,
+            content: true,
+        }
     }
 };
