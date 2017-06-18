@@ -49,6 +49,12 @@ module.exports = (router, {
             }
 
             const data = req.body;
+            const errors = req.app.locals.schemator.validateSync(resourceName, data);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
 
             req.app.locals[resourceName].create(data).then((entity) => {
                 res.status(201).send({
@@ -68,6 +74,12 @@ module.exports = (router, {
 
             const entityId = req.params.id;
             const updateDate = req.body;
+            const errors = req.app.locals.schemator.validateSync(resourceName, updateDate);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
 
             req.app.locals[Resource].update(entityId, updateDate).then((entity) => {
                 sendEntity(res, entity);

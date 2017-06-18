@@ -38,6 +38,13 @@ router.post(`${CLREndpoint}/follow`, (req, res) => {
                 user.followedUsers = [req.body.userId];
             }
 
+            const errors = req.app.locals.schemator.validateSync('User', user);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
+
             req.app.locals.User.update(user.id, user)
                 .then(user => {
                     res.send(Helpers.applyProjectionOnEntity(user,
@@ -57,6 +64,13 @@ router.post(`${CLREndpoint}/unfollow`, (req, res) => {
                 user.followedUsers = user.followedUsers.filter((userId) => {
                     return userId !== req.body.userId
                 });
+
+                const errors = req.app.locals.schemator.validateSync('User', user);
+
+                if (errors) {
+                    res.status(403).send(errors);
+                    return;
+                }
 
                 req.app.locals.User.update(user.id, user)
                     .then(user => {
@@ -80,6 +94,13 @@ router.post(`${CLREndpoint}/like`, (req, res) => {
                 post.likes = [req.user.id];
             }
 
+            const errors = req.app.locals.schemator.validateSync('Post', post);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
+
             updatePost(req, res, post);
         });
 
@@ -95,6 +116,13 @@ router.post(`${CLREndpoint}/dislike`, (req, res) => {
             if (post.likes) {
                 post.likes = _.filter(post.likes,
                     uid => uid !== req.user.id);
+
+                const errors = req.app.locals.schemator.validateSync('Post', post);
+
+                if (errors) {
+                    res.status(403).send(errors);
+                    return;
+                }
 
                 updatePost(req, res, post);
             } // TODO - error handler
