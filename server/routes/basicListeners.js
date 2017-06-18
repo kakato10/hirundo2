@@ -1,4 +1,5 @@
 const Helpers = require('../services/helpers');
+const _ = require('lodash');
 
 module.exports = (router, {
         CLREndpoint, ILREndpoint, resourceName,
@@ -19,8 +20,10 @@ module.exports = (router, {
     router.get(CLREndpoint, (req, res) => {
         let query;
 
-        if (filters && filters.getCLR) {
-            query = filters.getCLR(req)
+        if (_.keys(req.query).length && filters && filters.getCLRWithQuery) {
+            query = filters.getCLRWithQuery(req);
+        } else if (filters && filters.getCLR) {
+            query = filters.getCLR(req);
         }
 
         req.app.locals[resourceName].findAll(query).then((entities) => {

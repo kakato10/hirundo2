@@ -7,7 +7,7 @@ import Feed from '../../components/feed/feed';
 function mapStateToProps({users, auth, posts}) {
   return {
     users,
-    posts,
+    posts: posts.all,
     loggedUser: auth.user
   };
 }
