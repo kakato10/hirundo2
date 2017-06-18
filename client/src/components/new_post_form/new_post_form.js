@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import PropTypes from 'prop-types';
 
 export default class NewPostForm extends React.Component {
   constructor(props) {
@@ -23,35 +24,51 @@ export default class NewPostForm extends React.Component {
 
   render() {
     return (
-      <div className="new-post-form">
-        <Paper zDepth={2}>
-        <h2>What's on your mind?</h2>
-        <Divider/>
-        <TextField
-          hintText="What's on your mind?"
-          multiLine={true}
-          rows={1}
-          rowsMax={4}
-          onChange={(e, postText) => {
-            this.postText = postText;
-          }}
-          underlineShow={false}
-          style={{
-            marginLeft: 20,
-            marginRight: 20
-          }}
-          fullWidth
-        />
-        <Divider/>
-        <FlatButton
-          label="Post"
-          primary={true}
-          onTouchTap={() => {
-            this.onPostClicked();
+      <Card
+        className="new-post-form"
+        zDepth={2}
+        style={{
+          marginBottom: 20
+        }}>
+        <CardHeader
+          title="What's on your mind?"
+          titleStyle={{
+            fontSize: 18,
+            fontWeight: 'bold'
           }}/>
-        </Paper>
-      </div>
+        <Divider/>
+        <CardText>
+          <TextField
+            hintText="Type here"
+            multiLine={true}
+            rows={1}
+            rowsMax={4}
+            onChange={(e, postText) => {
+              this.postText = postText;
+            }}
+            underlineShow={false}
+            style={{
+              marginLeft: 20,
+              marginRight: 20
+            }}
+            fullWidth
+          />
+        </CardText>
+        <CardActions>
+          <FlatButton
+            label="Post"
+            primary={true}
+            onTouchTap={() => {
+              this.onPostClicked();
+            }}/>
+        </CardActions>
+      </Card>
     );
   }
 }
+
+NewPostForm.propTypes = {
+  user: PropTypes.object.isRequired,
+  createPost: PropTypes.func.isRequired,
+};
 
