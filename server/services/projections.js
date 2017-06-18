@@ -13,7 +13,8 @@ module.exports = {
             authorUsername: true,
             authorId: true,
             content: true,
-            likes: true
+            likes: true,
+            hashtags: true
         }
     }
 };

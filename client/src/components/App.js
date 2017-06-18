@@ -5,6 +5,7 @@ import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
 import RegistrationForm from '../containers/registration_form/registration_form';
 import Login from '../containers/login/login';
 import Feed from '../containers/feed/feed';
+import HashtagFeed from '../containers/hashtag_feed/hashtag_feed';
 import Layout from '../containers/Layout/Layout';
 
 import './app.css';
@@ -35,6 +36,9 @@ export default function App({store}) {
                  component={RegistrationForm}/>
           <Route path='login'
                  component={Login}/>
+          <Route path="hashtag_feed"
+                 onEnter={requireUser}
+                 component={HashtagFeed}/>
         </Route>
       </Router>
     </div>

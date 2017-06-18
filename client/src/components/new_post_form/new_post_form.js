@@ -11,6 +11,16 @@ export default class NewPostForm extends React.Component {
     this.postText = null;
   }
 
+  getHashTags(content) {
+    const words = content.split(' ');
+
+    return words.filter(word => {
+      return word[0] === '#';
+    }).map(hashtag => {
+      return hashtag.slice(1);
+    });
+  }
+
   onPostClicked() {
     const {createPost, user} = this.props;
     const postText = this.postText;
@@ -18,7 +28,8 @@ export default class NewPostForm extends React.Component {
     return createPost({
       content: postText,
       authorId: user.id,
-      authorUsername: user.username
+      authorUsername: user.username,
+      hashtags: this.getHashTags(postText)
     });
   }
 

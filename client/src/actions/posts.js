@@ -32,3 +32,15 @@ export function loadPosts() {
       })
   }
 }
+
+export function loadPostsByHashtag(hashtag) {
+  return dispatch => {
+    PostsApi.getPostsByHashtag(hashtag)
+      .then(posts => {
+        dispatch({
+          type: ACTIONS.POSTS_LOADED_BY_HASHTAG,
+          payload: {posts}
+        });
+      });
+  };
+}
