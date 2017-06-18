@@ -23,7 +23,7 @@ module.exports = (router, {
         if (_.keys(req.query).length && filters && filters.getCLRWithQuery) {
             query = filters.getCLRWithQuery(req);
         } else if (filters && filters.getCLR) {
-            query = filters.getCLR(req)
+            query = filters.getCLR(req);
         }
 
         req.app.locals[resourceName].findAll(query).then((entities) => {
@@ -57,6 +57,13 @@ module.exports = (router, {
                 data = filters.postCLR(data, req);
             }
 
+            const errors = req.app.locals.schemator.validateSync(resourceName, data);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
+
             req.app.locals[resourceName].create(data).then((entity) => {
                 res.status(201).send({
                     location: `${CLREndpoint}/${entity.id}`
@@ -75,6 +82,12 @@ module.exports = (router, {
 
             const entityId = req.params.id;
             const updateDate = req.body;
+            const errors = req.app.locals.schemator.validateSync(resourceName, updateDate);
+
+            if (errors) {
+                res.status(403).send(errors);
+                return;
+            }
 
             req.app.locals[Resource].update(entityId, updateDate).then((entity) => {
                 sendEntity(res, entity);

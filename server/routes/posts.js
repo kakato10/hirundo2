@@ -20,6 +20,15 @@ attachBasicListeners(router, {
                 }
             }
         };
+    },
+    getCLRWithQuery: req => {
+        return {
+            where: {
+                hashtags: {
+                    contains: req.query.hashtag
+                }
+            }
+        };
     }
 });
 

@@ -21,6 +21,10 @@ class PostsApi {
   getPostById(id) {
     return Connection.send(`${API_PATH}/${id}`);
   }
+
+  getPostsByHashtag(hashtag) {
+    return Connection.send(API_PATH, {hashtag});
+  }
 }
 
 export default new PostsApi();
