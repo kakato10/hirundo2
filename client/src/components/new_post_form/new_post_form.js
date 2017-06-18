@@ -8,7 +8,10 @@ import PropTypes from 'prop-types';
 export default class NewPostForm extends React.Component {
   constructor(props) {
     super(props);
-    this.postText = null;
+
+    this.state = {
+      postText: ''
+    };
   }
 
   getHashTags(content) {
@@ -23,7 +26,13 @@ export default class NewPostForm extends React.Component {
 
   onPostClicked() {
     const {createPost, user} = this.props;
-    const postText = this.postText;
+    const postText = this.state.postText;
+
+    this._textField.input.value = '';
+
+    this.setState({
+      postText: ''
+    });
 
     return createPost({
       content: postText,
@@ -55,7 +64,9 @@ export default class NewPostForm extends React.Component {
             rows={1}
             rowsMax={4}
             onChange={(e, postText) => {
-              this.postText = postText;
+              this.setState({
+                postText: postText
+              });
             }}
             underlineShow={false}
             style={{
@@ -63,6 +74,10 @@ export default class NewPostForm extends React.Component {
               marginRight: 20
             }}
             fullWidth
+            ref={(node) => {
+              this._textField = node;
+            }}
+            value={this.state.postText}
           />
         </CardText>
         <CardActions>
