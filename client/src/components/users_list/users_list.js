@@ -2,6 +2,8 @@ import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
+import PropTypes from 'prop-types';
+
 import '../users_list/users_list.css'
 
 export default class UsersList extends React.Component {
@@ -63,3 +65,9 @@ export default class UsersList extends React.Component {
     );
   }
 }
+
+UsersList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  followUser: PropTypes.func.isRequired,
+  unfollowUser: PropTypes.func.isRequired
+};

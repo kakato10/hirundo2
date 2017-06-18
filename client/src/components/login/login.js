@@ -1,13 +1,12 @@
-import {connect} from 'react-redux';
-import {login} from '../../actions/auth';
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import PropTypes from 'prop-types';
 
-
-class Login extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
+
     this.username = null;
     this.password = null;
   }
@@ -47,15 +46,8 @@ class Login extends React.Component {
       </div>
     );
   }
-
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    login: (username, password, nextPath) => {
-      dispatch(login(username, password, nextPath));
-    }
-  };
-}
-
-export default connect(null, mapDispatchToProps)(Login);
+Login.propTypes = {
+  login: PropTypes.func.isRequired
+};

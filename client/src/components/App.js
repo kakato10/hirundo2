@@ -1,10 +1,13 @@
 import React from 'react';
-import './app.css';
-import Login from './login/login';
+
 import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
-import RegistrationForm from '../components/registration_form/registration_form';
+
+import RegistrationForm from '../containers/registration_form/registration_form';
+import Login from '../containers/login/login';
 import Feed from '../containers/feed/feed';
 import Layout from '../containers/Layout/Layout';
+
+import './app.css';
 
 function requiresAuth(store, nextState, replace) {
   const currentUser = store.getState().auth.user;

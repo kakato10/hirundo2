@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import PropTypes from 'prop-types';
 
 export default class NewPostForm extends React.Component {
   constructor(props) {
@@ -65,4 +66,9 @@ export default class NewPostForm extends React.Component {
     );
   }
 }
+
+NewPostForm.propTypes = {
+  user: PropTypes.object.isRequired,
+  createPost: PropTypes.func.isRequired,
+};
 

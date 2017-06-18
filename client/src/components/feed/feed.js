@@ -1,12 +1,11 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Divider from 'material-ui/Divider';
+import PropTypes from 'prop-types';
 
 import NewPostForm from '../../containers/new_post_form/new_post_form';
 import UsersList from '../users_list/users_list';
+import PostsList from '../posts_list/posts_list';
 
 export default class Feed extends React.Component {
   constructor(props) {
@@ -26,77 +25,10 @@ export default class Feed extends React.Component {
       });
   }
 
-  renderPosts() {
-    const {posts} = this.props;
-    const loggedUserId = this.props.loggedUser.id;
-
-    return (
-      <div className="posts-list">
-        {posts.map((post, index) => {
-          const likesNumber = post.likes ? post.likes.length : 0;
-          const liked = post.likes && post.likes.includes(loggedUserId);
-
-          return (
-            <Card
-              key={index}
-              style={{
-                marginBottom: 20,
-                borderBottomRightRadius: 10,
-                borderBottomLeftRadius: 10,
-                marginTop: 20
-              }}
-              zDepth={3}>
-              <CardHeader
-                title={post.authorUsername}
-                style={{
-                  borderTopRightRadius: 10,
-                  borderTopLeftRadius: 10,
-                  backgroundColor: '#00bcd4',
-                }}
-                titleColor="white"
-                subtitleColor="white"
-                titleStyle={{
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  color: 'white'
-                }}
-                subtitle={`${likesNumber} likes`}
-              />
-              <CardText
-                expandable={false}
-                style={{
-                  wordWrap: 'break-word',
-                  fontSize: 18
-                }}>
-                {post.content}
-              </CardText>
-              <Divider/>
-              <CardActions>
-                { liked
-                  ? <FlatButton
-                    label="Dislike"
-                    onTouchTap={() => {
-                      this.props.dislikePost(post.id);
-                    }}
-                    secondary={true}/>
-                  : <FlatButton
-                    label="Like"
-                    onTouchTap={() => {
-                      this.props.likePost(post.id);
-                    }}
-                    primary={true}/>
-                }
-              </CardActions>
-            </Card>
-          );
-        })}
-      </div>
-    )
-  }
-
   render() {
     const {showUsersList} = this.state;
-    const {users, loggedUser, followUser, unfollowUser} = this.props;
+    const {posts, users, loggedUser,
+      followUser, unfollowUser, likePost, dislikePost} = this.props;
 
     return (
       <div className="feed">
@@ -108,7 +40,11 @@ export default class Feed extends React.Component {
           onTouchTap={() => {
             this.loadUsers();
           }}/>
-        {this.renderPosts()}
+        <PostsList
+          posts={posts}
+          loggedUser={loggedUser}
+          likePost={likePost}
+          dislikePost={dislikePost}/>
         <Dialog
           title="Users list"
           open={showUsersList}
@@ -128,3 +64,15 @@ export default class Feed extends React.Component {
     );
   }
 }
+
+Feed.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loggedUser: PropTypes.object.isRequired,
+  likePost: PropTypes.func.isRequired,
+  dislikePost: PropTypes.func.isRequired,
+  loadPosts: PropTypes.func.isRequired,
+  loadUsers: PropTypes.func.isRequired,
+  followUser: PropTypes.func.isRequired,
+  unfollowUser: PropTypes.func.isRequired,
+};

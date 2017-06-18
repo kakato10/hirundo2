@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import FlatButton from 'material-ui/FlatButton';
 import {Link, withRouter} from 'react-router';
+import PropTypes from 'prop-types';
 
 import './layout.css';
 
@@ -106,5 +107,10 @@ class Layout extends React.Component {
     )
   }
 }
+
+Layout.propTypes = {
+  router: PropTypes.object.isRequired,
+  user: PropTypes.object
+};
 
 export default withRouter(Layout);

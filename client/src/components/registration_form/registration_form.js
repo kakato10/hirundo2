@@ -1,11 +1,10 @@
-import {connect} from 'react-redux';
-import {register} from '../../actions/auth';
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
-class RegistrationForm extends React.Component {
+export default class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
     this.email = null;
@@ -96,15 +95,9 @@ class RegistrationForm extends React.Component {
       </div>
     );
   }
-
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    register: (userData) => {
-      dispatch(register(userData));
-    }
-  };
-}
 
-export default connect(null, mapDispatchToProps)(RegistrationForm);
+RegistrationForm.propTypes = {
+  register: PropTypes.func.isRequired
+};
