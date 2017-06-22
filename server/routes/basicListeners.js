@@ -51,7 +51,12 @@ module.exports = (router, {
                 return res.status(400).send('No data provided!');
             }
 
-            const data = req.body;
+            let data = req.body;
+
+            if (filters && filters.postCLR) {
+                data = filters.postCLR(data, req);
+            }
+
             const errors = req.app.locals.schemator.validateSync(resourceName, data);
 
             if (errors) {

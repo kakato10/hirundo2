@@ -65,6 +65,12 @@ export default class PostsList extends React.Component {
                     }}
                     primary={true}/>
                 }
+                <FlatButton
+                  label="Comments"
+                  onTouchTap={() => {
+                    this.props.displayComments(post.id);
+                  }}
+                  primary={true}/>
               </CardActions>
             </Card>
           );
@@ -78,5 +84,6 @@ PostsList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   loggedUser: PropTypes.object.isRequired,
   likePost: PropTypes.func.isRequired,
-  dislikePost: PropTypes.func.isRequired
+  dislikePost: PropTypes.func.isRequired,
+  displayComments: PropTypes.func.isRequired
 };

@@ -16,5 +16,13 @@ module.exports = {
             likes: true,
             hashtags: true
         }
+    },
+    comment: {
+        basic: {
+            id: true,
+            authorId: true,
+            authorUsername: true,
+            content: true,
+        }
     }
 };

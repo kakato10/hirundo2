@@ -4,6 +4,7 @@ import Dialog from 'material-ui/Dialog';
 import PropTypes from 'prop-types';
 
 import NewPostForm from '../../containers/new_post_form/new_post_form';
+import CommentsForm from '../../containers/comments_form/comments_form';
 import UsersList from '../users_list/users_list';
 import PostsList from '../posts_list/posts_list';
 
@@ -12,7 +13,11 @@ export default class Feed extends React.Component {
     super(props);
 
     this.state = {
-      showUsersList: false
+      showUsersList: false,
+      postDetails: {
+        showComments: false,
+        postId: null,
+      }
     };
 
     this.props.loadPosts();
@@ -20,13 +25,22 @@ export default class Feed extends React.Component {
 
   loadUsers() {
     this.props.loadUsers();
-      this.setState({
-        showUsersList: true
-      });
+    this.setState({
+      showUsersList: true
+    });
+  }
+
+  displayComments(postId) {
+    this.setState({
+      postDetails: {
+        showComments: true,
+        postId: postId,
+      }
+    });
   }
 
   render() {
-    const {showUsersList} = this.state;
+    const {showUsersList, postDetails} = this.state;
     const {posts, users, loggedUser,
       followUser, unfollowUser, likePost, dislikePost} = this.props;
 
@@ -44,7 +58,10 @@ export default class Feed extends React.Component {
           posts={posts}
           loggedUser={loggedUser}
           likePost={likePost}
-          dislikePost={dislikePost}/>
+          dislikePost={dislikePost}
+          displayComments={(postId) => {
+            this.displayComments(postId);
+          }}/>
         <Dialog
           title="Users list"
           open={showUsersList}
@@ -59,6 +76,21 @@ export default class Feed extends React.Component {
             loggedUser={loggedUser}
             followUser={followUser}
             unfollowUser={unfollowUser}/>
+        </Dialog>
+        <Dialog
+          title="Comments"
+          open={postDetails.showComments}
+          onRequestClose={() => {
+            this.setState({
+              postDetails: {
+                showComments: false,
+                postId: null,
+              }
+            });
+          }}
+          autoScrollBodyContent={true}>
+          <CommentsForm
+            postId={postDetails.postId}/>
         </Dialog>
       </div>
     );
