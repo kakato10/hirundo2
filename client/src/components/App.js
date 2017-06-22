@@ -6,6 +6,7 @@ import RegistrationForm from '../containers/registration_form/registration_form'
 import Login from '../containers/login/login';
 import Feed from '../containers/feed/feed';
 import HashtagFeed from '../containers/hashtag_feed/hashtag_feed';
+import MyPosts from '../containers/my_posts/my_posts';
 import Layout from '../containers/Layout/Layout';
 
 import './app.css';
@@ -39,6 +40,9 @@ export default function App({store}) {
           <Route path="hashtag_feed"
                  onEnter={requireUser}
                  component={HashtagFeed}/>
+          <Route path="my_posts"
+                 onEnter={requireUser}
+                 component={MyPosts}/>
         </Route>
       </Router>
     </div>

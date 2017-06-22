@@ -95,6 +95,7 @@ class Layout extends React.Component {
             }}/>
           { this.renderNavButton('feed', 'Feed') }
           { this.renderNavButton('hashtag_feed', 'Hashtag Feed') }
+          { this.renderNavButton('my_posts', 'My Posts') }
           {
             !user &&
             this.renderNavButton('login', 'Login')

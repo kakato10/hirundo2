@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 const initialState = {
   all: [],
-  withHashtag: []
+  withHashtag: [],
+  own: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -40,6 +41,15 @@ export default function reducer(state = initialState, action) {
 
       result = _.assign({}, state, {
         withHashtag: posts
+      });
+      break;
+    }
+
+    case ACTION_TYPES.USER_POSTS_LOADED: {
+      const {posts} = action.payload;
+
+      result = _.assign({}, state, {
+        own: posts
       });
       break;
     }
