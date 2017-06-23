@@ -25,6 +25,10 @@ class PostsApi {
   getPostsByHashtag(hashtag) {
     return Connection.send(API_PATH, {hashtag});
   }
+
+  getPostsOfCurrentUser() {
+    return Connection.send(`${API_PATH}/own`);
+  }
 }
 
 export default new PostsApi();

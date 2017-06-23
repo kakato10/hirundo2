@@ -14,6 +14,8 @@ module.exports = (router, {
             entity = Helpers.applyProjectionOnEntity(entity, projection);
         }
 
+        console.log(entity);
+
         res.send(entity);
     }
 
@@ -41,6 +43,8 @@ module.exports = (router, {
         req.app.locals[resourceName].find(entityId).then((entity) => {
             sendEntity(res, entity);
         }, (e) => {
+            console.log(e);
+
             res.status(500).send(e);
         });
     });

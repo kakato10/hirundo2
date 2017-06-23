@@ -74,10 +74,10 @@ export default class HashtagFeed extends React.Component {
   }
 }
 
-Feed.propTypes = {
+HashtagFeed.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   loggedUser: PropTypes.object.isRequired,
   likePost: PropTypes.func.isRequired,
+  dislikePost: PropTypes.func.isRequired,
   loadPostsByHashtag: PropTypes.func.isRequired,
-  loadPosts: PropTypes.func.isRequired,
 };

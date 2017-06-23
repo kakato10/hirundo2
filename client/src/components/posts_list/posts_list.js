@@ -3,17 +3,42 @@ import PropTypes from 'prop-types';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
+
+import CommentsForm from '../../containers/comments_form/comments_form';
 
 export default class PostsList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      postDetails: {
+        showComments: false,
+        postId: null,
+      }
+    };
+  }
+
+  displayComments(postId) {
+    this.setState({
+      postDetails: {
+        showComments: true,
+        postId: postId,
+      }
+    });
+  }
+
   render() {
     const {posts} = this.props;
     const loggedUserId = this.props.loggedUser.id;
+    const {postDetails} = this.state;
 
     return (
       <div className="posts-list">
         {posts.map((post, index) => {
           const likesNumber = post.likes ? post.likes.length : 0;
           const liked = post.likes && post.likes.includes(loggedUserId);
+          const renderLikeOrDislike = this.props.likePost && this.props.dislikePost;
 
           return (
             <Card
@@ -51,7 +76,7 @@ export default class PostsList extends React.Component {
               </CardText>
               <Divider/>
               <CardActions>
-                { liked
+                {renderLikeOrDislike && (liked
                   ? <FlatButton
                     label="Dislike"
                     onTouchTap={() => {
@@ -63,18 +88,33 @@ export default class PostsList extends React.Component {
                     onTouchTap={() => {
                       this.props.likePost(post.id);
                     }}
-                    primary={true}/>
+                    primary={true}/>)
                 }
                 <FlatButton
                   label="Comments"
                   onTouchTap={() => {
-                    this.props.displayComments(post.id);
+                    this.displayComments(post.id);
                   }}
                   primary={true}/>
               </CardActions>
             </Card>
           );
         })}
+        <Dialog
+          title="Comments"
+          open={postDetails.showComments}
+          onRequestClose={() => {
+            this.setState({
+              postDetails: {
+                showComments: false,
+                postId: null,
+              }
+            });
+          }}
+          autoScrollBodyContent={true}>
+          <CommentsForm
+            postId={postDetails.postId}/>
+        </Dialog>
       </div>
     );
   }
@@ -83,7 +123,6 @@ export default class PostsList extends React.Component {
 PostsList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object).isRequired,
   loggedUser: PropTypes.object.isRequired,
-  likePost: PropTypes.func.isRequired,
-  dislikePost: PropTypes.func.isRequired,
-  displayComments: PropTypes.func.isRequired
+  likePost: PropTypes.func,
+  dislikePost: PropTypes.func,
 };

@@ -44,3 +44,15 @@ export function loadPostsByHashtag(hashtag) {
       });
   };
 }
+
+export function loadPostsOfCurrentUser() {
+  return dispatch => {
+    PostsApi.getPostsOfCurrentUser()
+      .then(posts => {
+        dispatch({
+          type: ACTIONS.USER_POSTS_LOADED,
+          payload: {posts}
+        });
+      });
+  };
+}
