@@ -36,7 +36,7 @@ export default class NewPostForm extends React.Component {
 
     return createPost({
       content: postText,
-      authorId: user.id,
+      authorId: user._id,
       authorUsername: user.username,
       hashtags: this.getHashTags(postText)
     });

@@ -1,6 +1,6 @@
 module.exports = (DS, schemator) => {
     schemator.defineSchema('Post', {
-        id: 'id',
+        _id: 'id',
         authorUsername: 'string',
         authorId: 'string',
         content: 'string',

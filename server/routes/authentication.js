@@ -6,15 +6,23 @@ const router = express.Router();
 const _ = require('lodash');
 const LocalStrategy = require('../services/local_strategy');
 
-const endpoint = '/api/auth/login';
+const base = '/api/auth';
+const endpoint = `${base}/login`;
 
 const Helpers = require('../services/helpers');
 const projections = require('../services/projections');
 
+function _sendUser(req) {
+    res.send({
+        user: Helpers.applyProjectionOnEntity(req.user,
+            projections.user.basic)
+    });
+}
+
 passport.use(LocalStrategy);
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(function(req, id, done) {
@@ -24,13 +32,15 @@ passport.deserializeUser(function(req, id, done) {
         });
 });
 
+
 router.post(endpoint,
     passport.authenticate('local'),
     (req, res) => {
-        res.send({
-            user: Helpers.applyProjectionOnEntity(req.user,
-                projections.user.basic)
-        });
+        _sendUser(req);
     });
+
+router.get(`${base}/authenticate`, (req, res) => {
+    _sendUser(req);
+});
 
 module.exports = router;

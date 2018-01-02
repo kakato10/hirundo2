@@ -27,7 +27,7 @@ attachBasicListeners(router, {
     },
     postCLR: (post, req) => {
         return _.assign({}, post, {
-            authorId: req.user.id,
+            authorId: req.user._id,
             authorUsername: req.user.username
         });
     }

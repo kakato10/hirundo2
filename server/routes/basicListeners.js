@@ -14,8 +14,6 @@ module.exports = (router, {
             entity = Helpers.applyProjectionOnEntity(entity, projection);
         }
 
-        console.log(entity);
-
         res.send(entity);
     }
 
@@ -70,7 +68,7 @@ module.exports = (router, {
 
             req.app.locals[resourceName].create(data).then((entity) => {
                 res.status(201).send({
-                    location: `${CLREndpoint}/${entity.id}`
+                    location: `${CLREndpoint}/${entity._id}`
                 });
             }, (e) => {
                 res.status(500).send(e);
@@ -84,7 +82,7 @@ module.exports = (router, {
                 return res.status(400).send('No data provided!');
             }
 
-            const entityId = req.params.id;
+            const entityId = req.params._id;
             const updateDate = req.body;
             const errors = req.app.locals.schemator.validateSync(resourceName, updateDate);
 
@@ -103,7 +101,7 @@ module.exports = (router, {
 
     if (permissions.delete) {
         router.delete(ILREndpoint, (req, res) => {
-            const entityId = req.params.id;
+            const entityId = req.params._id;
 
             req.app.locals[resourceName].destroy(entityId).then(() => {
                 res.sendStatus(200);

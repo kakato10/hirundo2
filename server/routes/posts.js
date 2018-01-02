@@ -12,7 +12,7 @@ router.get(`${CLREndpoint}/own`, (req, res) => {
     req.app.locals.Post.findAll({
         where: {
             authorId: {
-                '===': req.user.id
+                '===': req.user._id
             }
         }
     })
@@ -27,10 +27,12 @@ attachBasicListeners(router, {
     resourceName: 'Post'
 }, postsProjections.basic, {
     getCLR: req => {
+        const followedUsers = req.user.followedUsers || [];
+
         return {
             where: {
                 authorId: {
-                    in: req.user.followedUsers
+                    in: followedUsers
                 }
             }
         };

@@ -11,7 +11,7 @@ export default class UsersList extends React.Component {
     const {followUser, unfollowUser} = this.props;
 
     const followed = loggedUser.followedUsers &&
-      loggedUser.followedUsers.includes(user.id);
+      loggedUser.followedUsers.includes(user._id);
 
     return (
       followed
@@ -20,14 +20,14 @@ export default class UsersList extends React.Component {
                         color: '#ff3838'
                       }}
                       onTouchTap={() => {
-                        unfollowUser(user.id);
+                        unfollowUser(user._id);
                       }}/>
         : <FlatButton label="Follow"
                       style={{
                         color: '#5cf751'
                       }}
                       onTouchTap={() => {
-                        followUser(user.id);
+                        followUser(user._id);
                       }}/>
     );
   }
@@ -41,7 +41,7 @@ export default class UsersList extends React.Component {
           {users && users.map((user, index) => {
 
             return (
-              loggedUser.id !== user.id &&
+              loggedUser._id !== user._id &&
               <div key={index}>
                 <ListItem disabled>
                   <div className="list-item">

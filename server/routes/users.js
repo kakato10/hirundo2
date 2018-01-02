@@ -18,7 +18,7 @@ attachBasicListeners(router, {
 }, projections.user.basic);
 
 function updatePost(req, res, post) {
-    return req.app.locals.Post.update(post.id, post)
+    return req.app.locals.Post.update(post._id, post)
         .then(post => {
             res.send(Helpers.applyProjectionOnEntity(post,
                 projections.post.basic));
@@ -30,7 +30,7 @@ router.post(`${CLREndpoint}/follow`, (req, res) => {
         return res.status(400).send('No data provided!');
     }
 
-    req.app.locals.User.find(req.user.id)
+    req.app.locals.User.find(req.user._id)
         .then(user => {
             if (user.followedUsers) {
                 user.followedUsers.push(req.body.userId);
@@ -45,7 +45,7 @@ router.post(`${CLREndpoint}/follow`, (req, res) => {
                 return;
             }
 
-            req.app.locals.User.update(user.id, user)
+            req.app.locals.User.update(user._id, user)
                 .then(user => {
                     res.send(Helpers.applyProjectionOnEntity(user,
                         projections.user.basic));
@@ -58,7 +58,7 @@ router.post(`${CLREndpoint}/unfollow`, (req, res) => {
         return res.status(400).send('No data provided!');
     }
 
-    req.app.locals.User.find(req.user.id)
+    req.app.locals.User.find(req.user._id)
         .then(user => {
             if (user.followedUsers) {
                 user.followedUsers = user.followedUsers.filter((userId) => {
@@ -72,7 +72,7 @@ router.post(`${CLREndpoint}/unfollow`, (req, res) => {
                     return;
                 }
 
-                req.app.locals.User.update(user.id, user)
+                req.app.locals.User.update(user._id, user)
                     .then(user => {
                         res.send(Helpers.applyProjectionOnEntity(user,
                             projections.user.basic));
@@ -89,9 +89,9 @@ router.post(`${CLREndpoint}/like`, (req, res) => {
     req.app.locals.Post.find(req.body.postId)
         .then(post => {
             if (post.likes) {
-                post.likes.push(req.user.id);
+                post.likes.push(req.user._id);
             } else {
-                post.likes = [req.user.id];
+                post.likes = [req.user._id];
             }
 
             const errors = req.app.locals.schemator.validateSync('Post', post);
@@ -115,7 +115,7 @@ router.post(`${CLREndpoint}/dislike`, (req, res) => {
         .then(post => {
             if (post.likes) {
                 post.likes = _.filter(post.likes,
-                    uid => uid !== req.user.id);
+                    uid => uid !== req.user._id);
 
                 const errors = req.app.locals.schemator.validateSync('Post', post);
 

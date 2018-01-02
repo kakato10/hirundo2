@@ -30,7 +30,7 @@ export default class PostsList extends React.Component {
 
   render() {
     const {posts} = this.props;
-    const loggedUserId = this.props.loggedUser.id;
+    const loggedUserId = this.props.loggedUser._id;
     const {postDetails} = this.state;
 
     return (
@@ -80,20 +80,20 @@ export default class PostsList extends React.Component {
                   ? <FlatButton
                     label="Dislike"
                     onTouchTap={() => {
-                      this.props.dislikePost(post.id);
+                      this.props.dislikePost(post._id);
                     }}
                     secondary={true}/>
                   : <FlatButton
                     label="Like"
                     onTouchTap={() => {
-                      this.props.likePost(post.id);
+                      this.props.likePost(post._id);
                     }}
                     primary={true}/>)
                 }
                 <FlatButton
                   label="Comments"
                   onTouchTap={() => {
-                    this.displayComments(post.id);
+                    this.displayComments(post._id);
                   }}
                   primary={true}/>
               </CardActions>

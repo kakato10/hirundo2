@@ -1,7 +1,7 @@
 module.exports = {
     user: {
         basic: {
-            id: true,
+            _id: true,
             username: true,
             email: true,
             followedUsers: true
@@ -9,7 +9,7 @@ module.exports = {
     },
     post: {
         basic: {
-            id: true,
+            _id: true,
             authorUsername: true,
             authorId: true,
             content: true,
@@ -19,7 +19,7 @@ module.exports = {
     },
     comment: {
         basic: {
-            id: true,
+            _id: true,
             authorId: true,
             authorUsername: true,
             content: true,

@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
       let modifiesPosts = _.clone(state.all);
 
       modifiesPosts = _.map(modifiesPosts, p => {
-        return p.id === post.id ? post : p;
+        return p._id === post._id ? post : p;
       });
 
       result = _.assign({}, state, {

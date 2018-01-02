@@ -7,7 +7,7 @@ import Login from '../containers/login/login';
 import Feed from '../containers/feed/feed';
 import HashtagFeed from '../containers/hashtag_feed/hashtag_feed';
 import MyPosts from '../containers/my_posts/my_posts';
-import Layout from '../containers/Layout/Layout';
+import Layout from '../containers/layout/layout';
 
 import './app.css';
 

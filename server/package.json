@@ -14,15 +14,18 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bson": "^1.0.4",
     "cookie-session": "^2.0.0-beta.2",
     "express": "^4.15.3",
     "firebase": "2.4.2",
     "js-data": "^2.10.0",
     "js-data-firebase": "^2.1.1",
+    "js-data-mongodb": "^1.0.2",
     "js-data-schema": "^1.2.5",
     "lodash": "^4.17.4",
+    "mongodb": "2.2.14",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
   },
   "bugs": {
     "url": "https://github.com/kakato10/hirundo2/issues"
