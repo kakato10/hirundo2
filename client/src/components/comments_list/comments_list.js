@@ -1,7 +1,6 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import {darkBlack} from 'material-ui/styles/colors';
 
 export default class CommentsList extends React.Component {
 
@@ -22,7 +21,7 @@ export default class CommentsList extends React.Component {
                     </p>
                   }
                   secondaryText={
-                    <p style={{color: darkBlack}}>
+                    <p>
                       {comment.content}
                     </p>
                   }/>

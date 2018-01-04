@@ -14,4 +14,15 @@ module.exports = class Helpers {
 
         return _.pick(entity, keysToGet);
     }
+
+    static findModelInstanceByUser(model, userId) {
+        return model.findAll({
+            where: {
+                userId: {
+                    '==': userId
+                }
+            }
+        });
+    }
+
 };

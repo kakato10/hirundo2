@@ -4,6 +4,7 @@ const _ = require('lodash');
 module.exports = (router, {
         CLREndpoint, ILREndpoint, resourceName,
         permissions = {
+            getCLR: true,
             put: true,
             post: true,
             delete: true
@@ -17,23 +18,25 @@ module.exports = (router, {
         res.send(entity);
     }
 
-    router.get(CLREndpoint, (req, res) => {
-        let query;
+    if (permissions.getCLR) {
+        router.get(CLREndpoint, (req, res) => {
+            let query;
 
-        if (_.keys(req.query).length && filters && filters.getCLRWithQuery) {
-            query = filters.getCLRWithQuery(req);
-        } else if (filters && filters.getCLR) {
-            query = filters.getCLR(req);
-        }
-
-        req.app.locals[resourceName].findAll(query).then((entities) => {
-            if (projection) {
-                entities = Helpers.applyProjectionOnCollection(entities, projection);
+            if (_.keys(req.query).length && filters && filters.getCLRWithQuery) {
+                query = filters.getCLRWithQuery(req);
+            } else if (filters && filters.getCLR) {
+                query = filters.getCLR(req);
             }
 
-            res.send(entities);
+            req.app.locals[resourceName].findAll(query).then((entities) => {
+                if (projection) {
+                    entities = Helpers.applyProjectionOnCollection(entities, projection);
+                }
+
+                res.send(entities);
+            });
         });
-    });
+    }
 
     router.get(ILREndpoint, (req, res) => {
         const entityId = req.params.id;

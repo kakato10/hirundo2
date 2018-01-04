@@ -7,9 +7,26 @@ import Login from '../containers/login/login';
 import Feed from '../containers/feed/feed';
 import HashtagFeed from '../containers/hashtag_feed/hashtag_feed';
 import MyPosts from '../containers/my_posts/my_posts';
+import Settings from '../containers/settings/settings';
 import Layout from '../containers/layout/layout';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {loadSettings} from 'actions/settings';
+import Paper from 'material-ui/Paper';
 
 import './app.css';
+
+const availableThemes = {
+  Light: lightBaseTheme,
+  Dark: darkBaseTheme
+};
+
+const style = {
+  height: '100vh',
+  width: '100vw',
+};
 
 function requiresAuth(store, nextState, replace) {
   const currentUser = store.getState().auth.user;
@@ -22,29 +39,46 @@ function requiresAuth(store, nextState, replace) {
   }
 }
 
-export default function App({store}) {
-  const requireUser = requiresAuth.bind(this, store);
+export default class App extends React.Component {
+  componentDidMount() {
+    this.props.loadSettings();
+  }
 
-  return (
-    <div>
-      <Router history={browserHistory}>
-        <Route path='/' component={Layout}>
-          <IndexRedirect to="/feed"/>
-          <Route path="feed"
-                 onEnter={requireUser}
-                 component={Feed}/>
-          <Route path="register"
-                 component={RegistrationForm}/>
-          <Route path='login'
-                 component={Login}/>
-          <Route path="hashtag_feed"
-                 onEnter={requireUser}
-                 component={HashtagFeed}/>
-          <Route path="my_posts"
-                 onEnter={requireUser}
-                 component={MyPosts}/>
-        </Route>
-      </Router>
-    </div>
-  );
+  render() {
+    const {store, settings} = this.props;
+    const stuff = settings.theme;
+    const theme = availableThemes[settings.theme];
+
+    const requireUser = requiresAuth.bind(this, store);
+
+    return (
+      <div style={style}>
+        <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+          <Paper style={style} zDepth={1}>
+            <Router history={browserHistory}>
+              <Route path='/' component={Layout}>
+                <IndexRedirect to="/feed"/>
+                <Route path="feed"
+                       onEnter={requireUser}
+                       component={Feed}/>
+                <Route path="register"
+                       component={RegistrationForm}/>
+                <Route path='login'
+                       component={Login}/>
+                <Route path="hashtag_feed"
+                       onEnter={requireUser}
+                       component={HashtagFeed}/>
+                <Route path="my_posts"
+                       onEnter={requireUser}
+                       component={MyPosts}/>
+                <Route path="settings"
+                       onEnter={requireUser}
+                       component={Settings}/>
+              </Route>
+            </Router>
+          </Paper>
+        </MuiThemeProvider>
+      </div>
+    );
+  }
 }

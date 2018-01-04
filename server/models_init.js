@@ -22,6 +22,7 @@ const registerPost = require('./models/post');
 const registerUser = require('./models/user');
 const registerLike = require('./models/like');
 const registerComment = require('./models/comment');
+const registerSettings = require('./models/settings');
 const schemator = require('./services/schemator');
 
 module.exports = (app) => {
@@ -31,4 +32,5 @@ module.exports = (app) => {
     app.locals.User = registerUser(DS, schemator);
     app.locals.Like = registerLike(DS, schemator);
     app.locals.Comment = registerComment(DS, schemator);
+    app.locals.Settings = registerSettings(DS, schemator);
 };

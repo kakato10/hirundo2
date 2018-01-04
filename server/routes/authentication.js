@@ -9,15 +9,8 @@ const LocalStrategy = require('../services/local_strategy');
 const base = '/api/auth';
 const endpoint = `${base}/login`;
 
-const Helpers = require('../services/helpers');
+const Helper = require('../services/helpers');
 const projections = require('../services/projections');
-
-function _sendUser(req) {
-    res.send({
-        user: Helpers.applyProjectionOnEntity(req.user,
-            projections.user.basic)
-    });
-}
 
 passport.use(LocalStrategy);
 
@@ -36,11 +29,18 @@ passport.deserializeUser(function(req, id, done) {
 router.post(endpoint,
     passport.authenticate('local'),
     (req, res) => {
-        _sendUser(req);
-    });
+        Helper.findModelInstanceByUser(req.app.locals.Settings, req.user._id)
+            .then(settings => {
+                const userSettings = settings && settings.length
+                    ? settings[0]
+                    : {};
 
-router.get(`${base}/authenticate`, (req, res) => {
-    _sendUser(req);
-});
+                res.send({
+                    user: Helper.applyProjectionOnEntity(req.user,
+                        projections.user.basic),
+                    settings: Helper.applyProjectionOnEntity(userSettings, projections.settings.basic)
+                });
+            });
+        });
 
 module.exports = router;

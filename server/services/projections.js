@@ -24,5 +24,10 @@ module.exports = {
             authorUsername: true,
             content: true,
         }
+    },
+    settings: {
+        basic: {
+            theme: true
+        }
     }
 };

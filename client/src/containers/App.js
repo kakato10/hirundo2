@@ -2,13 +2,31 @@ import React, {
   Component,
 } from 'react';
 import { connect } from 'react-redux';
-import {} from '../actions/';
 import Main from '../components/App';
+import {loadSettings} from '../actions/settings';
 
 class App extends Component {
   render() {
-    return <Main {...this.props} />;
+    return (
+      <Main {...this.props} />
+    )
   }
 }
 
-export default connect()(App);
+function mapStateToProps(state) {
+  return {
+    settings: state.settings
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadSettings: () => {
+      dispatch(loadSettings());
+    }
+  };
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

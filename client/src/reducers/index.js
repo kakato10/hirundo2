@@ -13,12 +13,14 @@ import authReducer from './auth';
 import usersReducer from './users';
 import postsReducer from './posts';
 import commentsReducer from './comments';
+import settingsReducer from './settings';
 
 const reducers = {
   auth: authReducer,
   users: usersReducer,
   posts: postsReducer,
   comments: commentsReducer,
+  settings: settingsReducer
 };
 
 const combined = combineReducers(reducers);
