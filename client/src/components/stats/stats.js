@@ -42,17 +42,17 @@ export default class Login extends React.Component {
 
     return (
       <div className="stats">
-        <div style={{marginBottom: '20px', fontSize: '40px'}}>Statistics</div>
+        <h1>Statistics</h1>
         {posts &&
           <div>
             <div>
-              <h1>Posts types</h1>
+              <h2>Posts types</h2>
               <C3Chart
                 data={this._getPostsChartData(stats.posts)}/>
             </div>
             {posts.hashtags &&
               <div>
-                <h1>Hashtag Usage: </h1>
+                <h2>Hashtag Usage: </h2>
                 <C3Chart
                   data={this._getHashtagChartData(stats.posts.hashtags)}/>
               </div>}

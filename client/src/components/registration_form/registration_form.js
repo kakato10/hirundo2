@@ -48,6 +48,7 @@ export default class RegistrationForm extends React.Component {
 
     return (
       <div className="login">
+        <h1>Register</h1>
         <TextField
           hintText="Enter your email"
           floatingLabelText="Email"
