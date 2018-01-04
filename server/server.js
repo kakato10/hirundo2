@@ -20,6 +20,7 @@ const usersRoutes = require('./routes/users.js');
 const commentsRoutes = require('./routes/comments.js');
 const authRoutes = require('./routes/authentication');
 const settingsRoutes = require('./routes/settings');
+const statsRoutes = require('./routes/stats');
 
 app.use(cookieSession({
     keys: ['secret1', 'secret2'],
@@ -41,6 +42,7 @@ app.use('/', usersRoutes);
 app.use('/', commentsRoutes);
 app.use('/', authRoutes);
 app.use('/', settingsRoutes);
+app.use('/', statsRoutes);
 
 app.listen(port, function () {
   console.log('Example app listening on port 3000!')

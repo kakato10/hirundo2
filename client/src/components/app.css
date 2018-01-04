@@ -1,3 +1,11 @@
+html, body, #app, .content, .page {
+  height: 100%;
+}
+
+.page {
+  overflow: auto;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;

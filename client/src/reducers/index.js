@@ -14,13 +14,15 @@ import usersReducer from './users';
 import postsReducer from './posts';
 import commentsReducer from './comments';
 import settingsReducer from './settings';
+import statsReducer from './stats';
 
 const reducers = {
   auth: authReducer,
   users: usersReducer,
   posts: postsReducer,
   comments: commentsReducer,
-  settings: settingsReducer
+  settings: settingsReducer,
+  stats: statsReducer
 };
 
 const combined = combineReducers(reducers);

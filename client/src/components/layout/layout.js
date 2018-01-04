@@ -62,7 +62,7 @@ class Layout extends React.Component {
     const {user} = this.props;
 
     return (
-      <div>
+      <div className='page'>
         <AppBar
           style={{
             marginBottom: 20
@@ -105,6 +105,7 @@ class Layout extends React.Component {
             !user &&
             this.renderNavButton('register', 'Register')
           }
+          {this.renderNavButton('stats', 'Statistics')}
         </Drawer>
       </div>
     )

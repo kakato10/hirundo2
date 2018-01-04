@@ -21,6 +21,8 @@ export default class Login extends React.Component {
 
     return (
       <div className="settings">
+        <h1 style={{marginBottom: '30px'}}> Settings </h1>
+        <h2> Theme </h2>
         <RadioButtonGroup
           name="Theme"
           defaultSelected={theme}

@@ -14,11 +14,9 @@ export default class MyPosts extends React.Component {
     const {posts, loggedUser} = this.props;
 
     return (
-      <div className="feed">
-        <PostsList
-          posts={posts}
-          loggedUser={loggedUser}/>
-      </div>
+      <PostsList
+        posts={posts}
+        loggedUser={loggedUser}/>
     );
   }
 }
