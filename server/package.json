@@ -25,7 +25,7 @@
     "lodash": "^4.17.4",
     "mongodb": "2.2.14",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
+    "passport-local": "^1.0.0"
   },
   "bugs": {
     "url": "https://github.com/kakato10/hirundo2/issues"

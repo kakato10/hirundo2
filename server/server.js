@@ -44,6 +44,6 @@ app.use('/', authRoutes);
 app.use('/', settingsRoutes);
 app.use('/', statsRoutes);
 
-app.listen(port, function () {
+app.listen(8001, function () {
   console.log('Example app listening on port 3000!')
 });

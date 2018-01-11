@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 
 class Connection {
   send(path, data, method) {
-    const url = `http://localhost:3000/api${path}`;
+    const url = `http://localhost:8001/api${path}`;
     const request = superagent(method || 'GET', url)
       .withCredentials()
       .type('application/json')
