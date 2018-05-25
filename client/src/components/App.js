@@ -15,7 +15,6 @@ import MyPosts from '../containers/my_posts/my_posts';
 import Settings from '../containers/settings/settings';
 import Layout from '../containers/layout/layout';
 import Stats from '../containers/stats/stats';
-
 import './app.css';
 
 const availableThemes = {
@@ -38,15 +37,46 @@ function requiresAuth(store, nextState, replace) {
   }
 }
 
+function exportTranslations(store, nextState) {
+  const translations = store.getState().settings.translations;
+
+  const location = nextState.location.pathname.slice(1)
+    .split('_')
+    .reduce((agg, curr, index) => {
+      if (index) {
+        return `${agg}${curr[0].toUpperCase()}${curr.slice(1)}`;
+      }
+
+      return curr;
+    }, '');
+  window.currLocation = location;
+  window.i18n = translations[location];
+}
+
+function sequelize(functions) {
+  return (nextState, replace) => {
+    functions.forEach(f => {
+      f(nextState, replace);
+    });
+  };
+}
+
 export default class App extends React.Component {
   componentDidMount() {
     this.props.loadSettings();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.settings.language !== nextProps.settings.language) {
+      window.i18n = nextProps.settings.translations[window.currLocation];
+    }
   }
 
   render() {
     const {store, settings} = this.props;
     const theme = availableThemes[settings.theme];
     const requireUser = requiresAuth.bind(this, store);
+    const getTranslations = exportTranslations.bind(this, store);
 
     return (
       <div style={style}>
@@ -56,22 +86,25 @@ export default class App extends React.Component {
               <Route path='/' component={Layout}>
                 <IndexRedirect to="/feed"/>
                 <Route path="feed"
-                       onEnter={requireUser}
+                       onEnter={sequelize([getTranslations, requireUser])}
                        component={Feed}/>
                 <Route path="register"
+                       onEnter={sequelize([getTranslations])}
                        component={RegistrationForm}/>
                 <Route path='login'
+                       onEnter={sequelize([getTranslations])}
                        component={Login}/>
-                <Route path="stats"
+                <Route path="statistics"
+                       onEnter={sequelize([getTranslations])}
                        component={Stats}/>
                 <Route path="hashtag_feed"
-                       onEnter={requireUser}
+                       onEnter={sequelize([getTranslations, requireUser])}
                        component={HashtagFeed}/>
                 <Route path="my_posts"
-                       onEnter={requireUser}
+                       onEnter={sequelize([getTranslations, requireUser])}
                        component={MyPosts}/>
                 <Route path="settings"
-                       onEnter={requireUser}
+                       onEnter={sequelize([getTranslations, requireUser])}
                        component={Settings}/>
               </Route>
             </Router>

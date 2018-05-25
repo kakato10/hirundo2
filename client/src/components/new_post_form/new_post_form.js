@@ -51,7 +51,7 @@ export default class NewPostForm extends React.Component {
           marginBottom: 20
         }}>
         <CardHeader
-          title="What's on your mind?"
+          title={i18n.slug}
           titleStyle={{
             fontSize: 18,
             fontWeight: 'bold'
@@ -59,7 +59,7 @@ export default class NewPostForm extends React.Component {
         <Divider/>
         <CardText>
           <TextField
-            hintText="Type here"
+            hintText={i18n.typeHere}
             multiLine={true}
             rows={1}
             rowsMax={4}
@@ -82,7 +82,7 @@ export default class NewPostForm extends React.Component {
         </CardText>
         <CardActions>
           <FlatButton
-            label="Post"
+            label={i18n.action}
             primary={true}
             onTouchTap={() => {
               this.onPostClicked();

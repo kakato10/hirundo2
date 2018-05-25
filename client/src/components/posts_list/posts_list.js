@@ -64,7 +64,7 @@ export default class PostsList extends React.Component {
                   fontWeight: 'bold',
                   color: 'white'
                 }}
-                subtitle={`${likesNumber} likes`}
+                subtitle={`${likesNumber} ${i18n.post.likes}`}
               />
               <CardText
                 expandable={false}
@@ -78,20 +78,20 @@ export default class PostsList extends React.Component {
               <CardActions>
                 {renderLikeOrDislike && (liked
                   ? <FlatButton
-                    label="Dislike"
+                    label={i18n.post.dislike}
                     onTouchTap={() => {
                       this.props.dislikePost(post._id);
                     }}
                     secondary={true}/>
                   : <FlatButton
-                    label="Like"
+                    label={i18n.post.like}
                     onTouchTap={() => {
                       this.props.likePost(post._id);
                     }}
                     primary={true}/>)
                 }
                 <FlatButton
-                  label="Comments"
+                  label={i18n.post.comments}
                   onTouchTap={() => {
                     this.displayComments(post._id);
                   }}
@@ -101,7 +101,7 @@ export default class PostsList extends React.Component {
           );
         })}
         <Dialog
-          title="Comments"
+          title={i18n.post.comments}
           open={postDetails.showComments}
           onRequestClose={() => {
             this.setState({

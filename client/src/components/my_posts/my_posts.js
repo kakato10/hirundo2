@@ -15,7 +15,7 @@ export default class MyPosts extends React.Component {
 
     return (
       <div>
-        <h1>My posts</h1>
+        <h1>{i18n.myPosts}</h1>
         <PostsList
           posts={posts}
           loggedUser={loggedUser}/>

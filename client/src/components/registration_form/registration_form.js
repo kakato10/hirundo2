@@ -48,10 +48,9 @@ export default class RegistrationForm extends React.Component {
 
     return (
       <div className="login">
-        <h1>Register</h1>
+        <h1>{i18n.label}</h1>
         <TextField
-          hintText="Enter your email"
-          floatingLabelText="Email"
+          floatingLabelText={i18n.email}
           type="text"
           fullWidth
           onChange={(e, email) => {
@@ -59,8 +58,7 @@ export default class RegistrationForm extends React.Component {
           }}
         /><br/>
         <TextField
-          hintText="Enter your username"
-          floatingLabelText="Username"
+          floatingLabelText={i18n.username}
           type="text"
           fullWidth
           onChange={(e, username) => {
@@ -68,18 +66,16 @@ export default class RegistrationForm extends React.Component {
           }}
         /><br/>
         <TextField
-          hintText="Enter your password"
-          floatingLabelText="Password"
+          floatingLabelText={i18n.password}
           type="password"
           fullWidth
-          errorText={errors.password ? "Passwords do not match!" : ''}
+          errorText={errors.password ? i18n.passwordsNotMatching : ''}
           onChange={(e, password) => {
             this.password = password;
           }}
         /><br/>
         <TextField
-          hintText="Enter your password again"
-          floatingLabelText="Password repeat"
+          floatingLabelText={i18n.passwordRepeat}
           type="password"
           fullWidth
           onChange={(e, password) => {
@@ -87,7 +83,7 @@ export default class RegistrationForm extends React.Component {
           }}
         /><br/>
         <FlatButton
-          label="Register"
+          label={i18n.action}
           primary={true}
           fullWidth
           onTouchTap={() => {

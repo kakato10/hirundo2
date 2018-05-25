@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {changeTheme} from '../../actions/settings';
+import {changeSettings} from '../../actions/settings';
 import Settings from '../../components/settings/settings';
 
 function mapStateToProps({settings}) {
@@ -10,8 +10,8 @@ function mapStateToProps({settings}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeTheme: (theme) => {
-      dispatch(changeTheme(theme));
+    changeSettings: settings => {
+      dispatch(changeSettings(settings));
     }
   };
 }

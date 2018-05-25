@@ -27,7 +27,8 @@ module.exports = {
     },
     settings: {
         basic: {
-            theme: true
+            theme: true,
+            language: true
         }
     }
 };

@@ -1,12 +1,12 @@
 import SettingsApi from '../services/settings';
 import ACTIONS from './action_types';
 
-export function changeTheme(theme) {
+export function changeSettings(settings) {
   return dispatch => {
-    SettingsApi.changeTheme(theme)
+    SettingsApi.changeSettings(settings)
       .then(({settings}) => {
         dispatch({
-          type: ACTIONS.THEME_CHANGED,
+          type: ACTIONS.SETTINGS_LOADED,
           payload: {
             settings
           }

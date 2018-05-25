@@ -34,7 +34,7 @@ export default class Feed extends React.Component {
       <div className="feed">
         <NewPostForm/>
         <RaisedButton
-          label="Show Users list"
+          label={i18n.usersListButton}
           secondary={true}
           fullWidth
           onTouchTap={() => {
@@ -46,7 +46,7 @@ export default class Feed extends React.Component {
           likePost={likePost}
           dislikePost={dislikePost}/>
         <Dialog
-          title="Users list"
+          title={i18n.usersList.label}
           open={showUsersList}
           onRequestClose={() => {
             this.setState({

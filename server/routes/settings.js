@@ -54,4 +54,16 @@ router.post(`${endpoint}/theme`, (req, res) => {
         })
 });
 
+router.post(`${endpoint}/language`, (req, res) => {
+    _updateOrCreate(req, res)
+        .then((settings) => {
+            res.status(200).send({
+                settings: Helper.applyProjectionOnEntity(settings, settingsProjections.basic)
+            });
+        })
+        .catch(e => {
+            res.status(500);
+        })
+});
+
 module.exports = router;

@@ -86,26 +86,26 @@ class Layout extends React.Component {
             });
           }}>
           <AppBar
-            title="Menu"
+            title={i18n.navigation.label}
             iconStyleLeft={{
               display: 'none'
             }}
             style={{
               marginBottom: 20
             }}/>
-          { user && this.renderNavButton('feed', 'Feed') }
-          { user && this.renderNavButton('hashtag_feed', 'Hashtag Feed') }
-          { user && this.renderNavButton('my_posts', 'My Posts') }
-          { user && this.renderNavButton('settings', 'Settings') }
+          { user && this.renderNavButton('feed', i18n.navigation.feed) }
+          { user && this.renderNavButton('hashtag_feed', i18n.navigation.hashtagFeed) }
+          { user && this.renderNavButton('my_posts', i18n.navigation.myPosts) }
+          { user && this.renderNavButton('settings', i18n.navigation.settings) }
           {
             !user &&
-            this.renderNavButton('login', 'Login')
+            this.renderNavButton('login', i18n.navigation.login)
           }
           {
             !user &&
-            this.renderNavButton('register', 'Register')
+            this.renderNavButton('register', i18n.navigation.register)
           }
-          {this.renderNavButton('stats', 'Statistics')}
+          {this.renderNavButton('statistics', i18n.navigation.statistics)}
         </Drawer>
       </div>
     )

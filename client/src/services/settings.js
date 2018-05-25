@@ -3,8 +3,8 @@ import Connection from './Connection.js';
 const API_PATH = '/settings';
 
 class SettingsApi {
-  changeTheme(theme) {
-    return Connection.send(`${API_PATH}/theme`, {theme}, 'POST');
+  changeSettings(settings) {
+    return Connection.send(`${API_PATH}/theme`, settings, 'POST');
   }
 
   loadSettings() {

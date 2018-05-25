@@ -45,7 +45,7 @@ export default class CommentsForm extends React.Component {
             marginBottom: 20
           }}>
           <CardHeader
-            title="Would you like to add a comment?"
+            title={i18n.post.comment.comment}
             titleStyle={{
               fontSize: 18,
               fontWeight: 'bold'
@@ -57,7 +57,7 @@ export default class CommentsForm extends React.Component {
           <Divider/>
           <CardText>
             <TextField
-              hintText="What do you think?"
+              hintText={i18n.post.comment.placeholder}
               multiLine={true}
               rows={1}
               rowsMax={4}
@@ -76,7 +76,7 @@ export default class CommentsForm extends React.Component {
           </CardText>
           <CardActions>
             <FlatButton
-              label="Comment"
+              label={i18n.post.comment.action}
               primary={true}
               onTouchTap={(postId) => {
                 this.onCommentCreated(postId);

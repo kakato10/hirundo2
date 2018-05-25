@@ -18,10 +18,9 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <h1>Login</h1>
+        <h1>{i18n.label}</h1>
         <TextField
-          hintText="Enter your username"
-          floatingLabelText="Username"
+          floatingLabelText={i18n.username}
           type="text"
           fullWidth
           onChange={(e, username) => {
@@ -29,8 +28,7 @@ export default class Login extends React.Component {
           }}
         />
         <TextField
-          hintText="Enter your password"
-          floatingLabelText="Password"
+          floatingLabelText={i18n.password}
           type="password"
           fullWidth
           onChange={(e, password) => {
@@ -38,7 +36,7 @@ export default class Login extends React.Component {
           }}
         />
         <FlatButton
-          label="Login"
+          label={i18n.action}
           primary={true}
           fullWidth
           onTouchTap={() => {

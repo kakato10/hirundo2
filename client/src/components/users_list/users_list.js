@@ -15,14 +15,14 @@ export default class UsersList extends React.Component {
 
     return (
       followed
-        ? <FlatButton label="Unfollow"
+        ? <FlatButton label={i18n.usersList.unfollow}
                       style={{
                         color: '#ff3838'
                       }}
                       onTouchTap={() => {
                         unfollowUser(user._id);
                       }}/>
-        : <FlatButton label="Follow"
+        : <FlatButton label={i18n.usersList.follow}
                       style={{
                         color: '#5cf751'
                       }}

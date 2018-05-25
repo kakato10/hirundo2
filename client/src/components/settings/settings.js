@@ -17,27 +17,52 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const {theme} = this.props.settings;
+    const {theme, language} = this.props.settings;
 
     return (
       <div className="settings">
-        <h1 style={{marginBottom: '30px'}}> Settings </h1>
-        <h2> Theme </h2>
+        <h1 style={{marginBottom: '30px'}}> {i18n.label} </h1>
+        <h2> {i18n.theme} </h2>
         <RadioButtonGroup
           name="Theme"
           defaultSelected={theme}
           onChange={(e, theme) => {
-            this.props.changeTheme(theme);
+            this.props.changeSettings({
+              theme,
+              language
+            });
           }}
         >
           <RadioButton
             value="Light"
-            label="Light"
+            label={i18n.themes.light}
             style={styles.radioButton}
           />
           <RadioButton
             value="Dark"
-            label="Dark"
+            label={i18n.themes.dark}
+            style={styles.radioButton}
+          />
+        </RadioButtonGroup>
+        <h2> {i18n.language} </h2>
+        <RadioButtonGroup
+          name="Language"
+          defaultSelected={language}
+          onChange={(e, language) => {
+            this.props.changeSettings({
+              theme,
+              language
+            });
+          }}
+        >
+          <RadioButton
+            value="en"
+            label={i18n.languages.en}
+            style={styles.radioButton}
+          />
+          <RadioButton
+            value="bg"
+            label={i18n.languages.bg}
             style={styles.radioButton}
           />
         </RadioButtonGroup>
@@ -48,5 +73,5 @@ export default class Login extends React.Component {
 
 Login.propTypes = {
   settings: PropTypes.object.isRequired,
-  changeTheme: PropTypes.func.isRequired
+  changeSettings: PropTypes.func.isRequired
 };

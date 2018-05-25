@@ -23,7 +23,7 @@ export default class HashtagFeed extends React.Component {
           marginBottom: 20
         }}>
         <CardHeader
-          title="Search for a hashtag"
+          title={i18n.label}
           titleStyle={{
             fontSize: 18,
             fontWeight: 'bold'
@@ -31,7 +31,7 @@ export default class HashtagFeed extends React.Component {
         <Divider/>
         <CardText>
           <TextField
-            hintText="Enter hashtag"
+            hintText={i18n.placeholder}
             multiLine={true}
             rows={1}
             rowsMax={4}
@@ -48,7 +48,7 @@ export default class HashtagFeed extends React.Component {
         </CardText>
         <CardActions>
           <FlatButton
-            label="Search"
+            label={i18n.action}
             secondary={true}
             fullWidth
             onTouchTap={() => {
