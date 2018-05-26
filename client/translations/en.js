@@ -82,7 +82,8 @@ const translations = {
     theme: 'Theme',
     themes: {
       light: 'Light',
-      dark: 'Dark'
+      dark: 'Dark',
+      green: 'Green'
     },
     language: 'Language',
     languages: {

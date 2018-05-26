@@ -83,7 +83,8 @@ const translations = {
     theme: 'Тема',
     themes: {
       light: 'Светла',
-      dark: 'Тъмна'
+      dark: 'Тъмна',
+      green: 'Зелена'
     },
     language: 'Език',
     languages: {

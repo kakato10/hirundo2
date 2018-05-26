@@ -7,11 +7,10 @@ import Drawer from 'material-ui/Drawer';
 import FlatButton from 'material-ui/FlatButton';
 import {Link, withRouter} from 'react-router';
 import PropTypes from 'prop-types';
+import Menu from 'material-ui-icons/Menu'
 
 import './layout.css';
-
 const navButtonStyle = {
-  color: '#0097a7',
   textAlign: 'left',
   paddingLeft: 20,
   fontSize: 16,
@@ -35,7 +34,8 @@ class Layout extends React.Component {
     const active = router && router.isActive(link);
     const activeStyles = active
       ? {
-        backgroundColor: '#e3e5e8'
+        backgroundColor: window.themePalette.accent1Color,
+        color: window.themePalette.alternateTextColor
       }
       : {};
 
@@ -67,12 +67,27 @@ class Layout extends React.Component {
           style={{
             marginBottom: 20
           }}
-          title="Hirundo"
+          iconElementLeft={(
+            <Menu
+              color={window.themePalette.alternateTextColor}
+            />
+          )}
+          iconStyleLeft={{
+            display: 'flex',
+            alignItems: 'center',
+            marginTop: 0
+          }}
+          title={(
+            <div className='logo-container'>
+              <img src="https://image.ibb.co/b6zgBT/logo.png"/>
+            </div>
+          )}
           onLeftIconButtonTouchTap={() => {
             this.setState({
               openMenu: true
             });
-          }}/>
+          }}>
+        </AppBar>
         <div className="content">
           {this.props.children}
         </div>
@@ -87,12 +102,14 @@ class Layout extends React.Component {
           }}>
           <AppBar
             title={i18n.navigation.label}
-            iconStyleLeft={{
-              display: 'none'
+            titleStyle={{
+              color: window.themePalette.alternateTextColor
             }}
             style={{
               marginBottom: 20
-            }}/>
+            }}
+            showMenuIconButton={false}
+          />
           { user && this.renderNavButton('feed', i18n.navigation.feed) }
           { user && this.renderNavButton('hashtag_feed', i18n.navigation.hashtagFeed) }
           { user && this.renderNavButton('my_posts', i18n.navigation.myPosts) }

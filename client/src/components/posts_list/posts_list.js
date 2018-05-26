@@ -55,7 +55,7 @@ export default class PostsList extends React.Component {
                 style={{
                   borderTopRightRadius: 10,
                   borderTopLeftRadius: 10,
-                  backgroundColor: '#00bcd4',
+                  backgroundColor: window.themePalette.primary1Color,
                 }}
                 titleColor="white"
                 subtitleColor="white"

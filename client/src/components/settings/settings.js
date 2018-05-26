@@ -43,6 +43,11 @@ export default class Login extends React.Component {
             label={i18n.themes.dark}
             style={styles.radioButton}
           />
+          <RadioButton
+            value="Green"
+            label={i18n.themes.green}
+            style={styles.radioButton}
+          />
         </RadioButtonGroup>
         <h2> {i18n.language} </h2>
         <RadioButtonGroup

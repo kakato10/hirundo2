@@ -1,8 +1,5 @@
 import React from 'react';
 import {Router, Route, browserHistory, IndexRedirect} from 'react-router';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {loadSettings} from 'actions/settings';
 import Paper from 'material-ui/Paper';
@@ -15,12 +12,8 @@ import MyPosts from '../containers/my_posts/my_posts';
 import Settings from '../containers/settings/settings';
 import Layout from '../containers/layout/layout';
 import Stats from '../containers/stats/stats';
+import Themes from '../themes';
 import './app.css';
-
-const availableThemes = {
-  Light: lightBaseTheme,
-  Dark: darkBaseTheme
-};
 
 const style = {
   height: '100%',
@@ -67,20 +60,25 @@ export default class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.settings.language !== nextProps.settings.language) {
+    if (nextProps.settings.language &&
+        this.props.settings.language !== nextProps.settings.language) {
       window.i18n = nextProps.settings.translations[window.currLocation];
     }
   }
 
   render() {
     const {store, settings} = this.props;
-    const theme = availableThemes[settings.theme];
+    const theme = Themes.getTheme(settings.theme);
     const requireUser = requiresAuth.bind(this, store);
     const getTranslations = exportTranslations.bind(this, store);
 
+    if(theme) {
+      window.themePalette = theme.palette
+    }
+
     return (
       <div style={style}>
-        <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+        <MuiThemeProvider muiTheme={theme}>
           <Paper style={style} zDepth={1}>
             <Router history={browserHistory}>
               <Route path='/' component={Layout}>

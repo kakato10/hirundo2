@@ -46,7 +46,12 @@ export default class Feed extends React.Component {
           likePost={likePost}
           dislikePost={dislikePost}/>
         <Dialog
+          titleStyle={{
+            backgroundColor: window.themePalette.primary1Color,
+            color: window.themePalette.alternateTextColor
+          }}
           title={i18n.usersList.label}
+
           open={showUsersList}
           onRequestClose={() => {
             this.setState({

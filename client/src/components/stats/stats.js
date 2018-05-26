@@ -55,7 +55,8 @@ export default class Login extends React.Component {
                 <h2>{i18n.hashtagUsage}</h2>
                 <C3Chart
                   data={this._getHashtagChartData(stats.posts.hashtags)}/>
-              </div>}
+              </div>
+            }
           </div>
         }
       </div>

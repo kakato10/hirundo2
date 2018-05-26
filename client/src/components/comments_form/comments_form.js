@@ -51,7 +51,7 @@ export default class CommentsForm extends React.Component {
               fontWeight: 'bold'
             }}
             style={{
-              backgroundColor: '#00bcd4',
+              backgroundColor: window.themePalette.primary1Color,
             }}
             titleColor="white"/>
           <Divider/>

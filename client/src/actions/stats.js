@@ -12,3 +12,15 @@ export function loadStats() {
       });
   };
 }
+
+export function loadTrendingHashtags() {
+  return dispatch => {
+    StatsApi.getTrendingHashtags()
+      .then(stats => {
+        dispatch({
+          type: ACTIONS.STATS_TRENDING_LOADED,
+          payload: {stats}
+        });
+      });
+  };
+}

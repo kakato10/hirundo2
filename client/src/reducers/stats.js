@@ -14,6 +14,14 @@ export default function reducer(state = initialState, action) {
       break;
     }
 
+    case ACTION_TYPES.STATS_TRENDING_LOADED: {
+      const {stats} = action.payload;
+
+      result = _.extend(state, stats);
+
+      break;
+    }
+
     default: {
       result = _.clone(state);
     }

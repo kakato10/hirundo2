@@ -18,7 +18,7 @@ export function changeSettings(settings) {
 export function loadSettings() {
   return dispatch => {
     return SettingsApi.loadSettings()
-      .then((settings) => {
+      .then(({settings}) => {
         dispatch({
           type: ACTIONS.SETTINGS_LOADED,
           payload: {

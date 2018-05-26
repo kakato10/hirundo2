@@ -52,9 +52,13 @@ export default class NewPostForm extends React.Component {
         }}>
         <CardHeader
           title={i18n.slug}
+          style={{
+            backgroundColor: window.themePalette.primary1Color
+          }}
           titleStyle={{
             fontSize: 18,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: window.themePalette.alternateTextColor
           }}/>
         <Divider/>
         <CardText>

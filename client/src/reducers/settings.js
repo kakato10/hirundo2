@@ -15,7 +15,6 @@ function extractSettings(action) {
     : settings;
 
   settingsToStore.translations = Translations[settingsToStore.language];
-  console.log(settingsToStore.language);
 
   return settingsToStore;
 }
